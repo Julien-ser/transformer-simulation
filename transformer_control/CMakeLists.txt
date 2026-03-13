@@ -21,7 +21,7 @@ find_package(std_srvs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(trajectory_msgs REQUIRED)
 find_package(control_msgs REQUIRED)
-find_package(ros2_control REQUIRED)
+find_package(nav_msgs REQUIRED)
 find_package(ros2_controllers REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(transformer_description REQUIRED)
@@ -98,6 +98,26 @@ rosidl_target_interfaces(safety_monitor
   ${PROJECT_NAME} "rosidl_typesupport_cpp"
 )
 
+# Autonomous mission executable
+add_executable(autonomous_mission src/autonomous_mission.cpp)
+target_include_directories(autonomous_mission PRIVATE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(autonomous_mission
+  rclcpp
+  std_msgs
+  std_srvs
+  sensor_msgs
+  nav_msgs
+  trajectory_msgs
+  control_msgs
+  transformer_description
+)
+rosidl_target_interfaces(autonomous_mission
+  ${PROJECT_NAME} "rosidl_typesupport_cpp"
+)
+
 # Unit tests for transformation state machine
 if(BUILD_TESTING)
   ament_add_gtest(test_transformation_state_machine
@@ -122,20 +142,9 @@ install(TARGETS
   transformation_state_machine
   transformation_controller
   safety_monitor
+  autonomous_mission
   DESTINATION lib/${PROJECT_NAME}
 )
-
-install(DIRECTORY launch config
-  DESTINATION share/${PROJECT_NAME}/
-)
-
-# install(TARGETS
-#   transformation_state_machine
-#   transformation_controller
-#   safety_monitor
-#   autonomous_mission
-#   DESTINATION lib/${PROJECT_NAME}
-# )
 
 ament_export_dependencies(
   rclcpp

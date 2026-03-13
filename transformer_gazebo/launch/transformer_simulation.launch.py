@@ -352,6 +352,25 @@ def generate_launch_description():
         ],
     )
 
+    # Autonomous mission node (optional)
+    autonomous_mission_node = Node(
+        package="transformer_control",
+        executable="autonomous_mission",
+        name="autonomous_mission",
+        output="screen",
+        parameters=[
+            control_config,
+            {
+                "distance_threshold": 5.0,
+                "obstacle_range": 3.0,
+                "humanoid_speed": 0.5,
+                "vehicular_speed": 2.0,
+                "goal_tolerance": 0.5,
+                "transformation_cooldown": 10.0,
+            },
+        ],
+    )
+
     # Delay transformation/safety nodes until controllers are active
     delayed_transformation_nodes = RegisterEventHandler(
         OnProcessStart(
@@ -359,7 +378,11 @@ def generate_launch_description():
             on_start=[
                 TimerAction(
                     period=2.0,
-                    actions=[transformation_state_machine_node, safety_monitor_node],
+                    actions=[
+                        transformation_state_machine_node,
+                        safety_monitor_node,
+                        autonomous_mission_node,
+                    ],
                 )
             ],
         )
