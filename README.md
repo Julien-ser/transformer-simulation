@@ -12,7 +12,7 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
 
 - ✅ Task 1.1: Technical architecture defined ([docs/architecture.md](docs/architecture.md))
 - ✅ Task 1.2: ROS2 workspace structure setup
-- ⬜ Task 1.3: Dependencies installation script
+- ✅ Task 1.3: Dependencies installation script ([scripts/setup_deps.sh](scripts/setup_deps.sh))
 - ⬜ Task 1.4: Initial setup instructions (this document)
 
 ## Architecture

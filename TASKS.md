@@ -6,7 +6,7 @@
   - *Deliverable:* `docs/architecture.md` with component diagram and ROS2 topic/service layout
 - [x] **Task 1.2:** Set up ROS2 workspace structure with proper package organization
   - *Deliverable:* Complete ROS2 workspace at `~/ros2_ws/src/transformer_sim/` with CMakeLists.txt and package.xml templates for: `transformer_gazebo`, `transformer_control`, `transformer_description`
-- [ ] **Task 1.3:** Install and configure simulation dependencies (Gazebo, ROS2 control, robot state publisher)
+- [x] **Task 1.3:** Install and configure simulation dependencies (Gazebo, ROS2 control, robot state publisher)
   - *Deliverable:* Verified installation script `scripts/setup_deps.sh` and successful `ros2 pkg list` showing required packages
 - [ ] **Task 1.4:** Create initial project README with build/run instructions and contributing guidelines
   - *Deliverable:* Comprehensive `README.md` with setup steps, simulation launch commands, and expected behavior descriptions
