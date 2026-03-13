@@ -22,7 +22,7 @@
   - *Deliverable:* Spawn coordinates documented in `config/spawn_points.yaml` and world file entity placements
 
 ## Phase 3: Robot Modeling & URDF Development
-- [ ] **Task 3.1:** Design complete URDF for humanoid robot form with articulated joints (head, arms, legs, torso)
+- [x] **Task 3.1:** Design complete URDF for humanoid robot form with articulated joints (head, arms, legs, torso)
   - *Deliverable:* `transformer_description/urdf/humanoid.urdf` with at least 15 DOF, collision meshes, and visual STL references
 - [ ] **Task 3.2:** Design complete URDF for vehicular robot form with wheel joints and compact body
   - *Deliverable:* `transformer_description/urdf/vehicular.urdf` with wheel joints, reduced profile, and shared component references to humanoid parts
