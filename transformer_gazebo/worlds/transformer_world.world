@@ -67,11 +67,41 @@
       <pose>0.0 -3.0 0 0 0 1.5708</pose>
     </include>
 
-    <!-- Obstacle Course: Combined challenges for comprehensive testing -->
-    <include>
-      <uri>model://obstacle_course</uri>
-      <pose>-5.0 -2.0 0 0 0 0</pose>
-    </include>
+     <!-- Obstacle Course: Combined challenges for comprehensive testing -->
+     <include>
+       <uri>model://obstacle_course</uri>
+       <pose>-5.0 -2.0 0 0 0 0</pose>
+     </include>
 
-  </world>
-</sdf>
+     <!-- SENSOR PLACEMENTS FOR ROBOT PERCEPTION TESTING -->
+
+     <!-- RGB Camera: Overhead view of the transformation area -->
+     <include>
+       <uri>model://rgb_camera</uri>
+       <pose>0.0 0.0 6.0 0 0 0</pose>
+     </include>
+
+     <!-- LIDAR 2D: Perimeter scanning at multiple elevations -->
+     <include>
+       <uri>model://lidar_2d</uri>
+       <pose>-8.0 0.0 0.5 0 0 0</pose>
+     </include>
+
+     <include>
+       <uri>model://lidar_2d</uri>
+       <pose>8.0 0.0 0.5 0 0 0</pose>
+     </include>
+
+     <include>
+       <uri>model://lidar_2d</uri>
+       <pose>0.0 8.0 0.5 0 0 -1.5708</pose>
+     </include>
+
+     <!-- IMU Sensor: Near spawn points for orientation reference -->
+     <include>
+       <uri>model://imu_sensor</uri>
+       <pose>0.0 0.0 0.2 0 0 0</pose>
+     </include>
+
+   </world>
+ </sdf>

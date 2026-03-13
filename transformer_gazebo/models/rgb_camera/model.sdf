@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="rgb_camera">
+    <static>true</static>
+    <pose>0 0 2.5 0 0 0</pose>
+
+    <!-- Link -->
+    <link name="camera_link">
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8 0.8 0.8 1</ambient>
+          <diffuse>0.8 0.8 0.8 1</diffuse>
+        </material>
+      </visual>
+
+      <!-- Camera Sensor -->
+      <sensor name="camera" type="camera">
+        <camera name="camera_sensor">
+          <horizontal_fov>1.5708</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0.0</stddev>
+          </noise>
+        </camera>
+
+        <!-- ROS2 Plugin -->
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <ros>
+            <namespace>/sensors</namespace>
+            <remapping>image_raw:=rgb_camera/image_raw</remapping>
+          </ros>
+          <camera_name>rgb_camera</camera_name>
+          <frame_name>camera_link</frame_name>
+          <update_rate>30.0</update_rate>
+        </plugin>
+      </sensor>
+    </link>
+  </model>
+</sdf>

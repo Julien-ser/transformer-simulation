@@ -16,7 +16,7 @@
   - *Deliverable:* `transformer_gazebo/worlds/transformer_world.world` with proper gravity, physics engine, and ambient lighting
 - [x] **Task 2.2:** Design and add environment obstacles and test structures (ramps, platforms, walls)
   - *Deliverable:* Enhanced world file with 3D models of obstacles in `transformer_gazebo/models/` and referenced in world file
-- [ ] **Task 2.3:** Configure sensor placement locations (cameras, LIDAR, IMU) in world for robot perception testing
+- [x] **Task 2.3:** Configure sensor placement locations (cameras, LIDAR, IMU) in world for robot perception testing
   - *Deliverable:* Sensor model placements in world file with ROS2 sensor plugin configurations
 - [ ] **Task 2.4:** Create demo scenario spawn points for both humanoid and vehicular configurations
   - *Deliverable:* Spawn coordinates documented in `config/spawn_points.yaml` and world file entity placements
