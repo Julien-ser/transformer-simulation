@@ -274,7 +274,7 @@ void TransformationController::execute_transformation(const std::string& target_
     // Note: For velocity control, we'd need to convert position trajectory to velocity profile
     // For simplicity, we'll send positions and let controller handle it or use velocity directly
     // In practice, for velocity joints we'd send velocities in the trajectory
-    send_trajectory_goal(wheel_velocity_controller_name_, wheel_trajectory);
+    send_trajectory_goal(wheel_controller_name_, wheel_trajectory);
     
     // 2. Set arms and head to tucked position
     std::map<std::string, double> arm_head_targets;
@@ -545,7 +545,7 @@ bool TransformationController::send_trajectory_goal(
   {
     client = arm_head_trajectory_client_;
   }
-  else if (controller_name == wheel_velocity_controller_name_)
+  else if (controller_name == wheel_controller_name_)
   {
     client = wheel_velocity_client_;
   }
