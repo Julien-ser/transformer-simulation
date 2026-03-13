@@ -632,3 +632,213 @@ drwxr-xr-x 6 julien julien 4096 Mar 12 23:23 ..
 [0m
 Task 2.1 completed. Created `transformer_gazebo/worlds/transformer_world.world` with ODE physics, ground plane, lighting, and documented spawn points. Updated TASKS.md and README.md to reflect progress.
 📝 Log saved: logs/iteration-7.md
+📊 Token Usage: 4750 / Session: 32000 / 64000
+Unstaged changes after reset:
+M	logs/worker-session-20260312-232005.log
+✅ Changes committed
+To https://github.com/Julien-ser/transformer-simulation.git
+   1b09a3a..814e007  main -> main
+✅ Pushed to GitHub
+📊 Updated Tasks: 5/20 completed, 15 remaining
+   Next task: **Task 2.2:** Design and add environment obstacles and test ...
+📍 Iteration 8 at Thu Mar 12 11:28:22 PM EDT 2026...
+🤖 OpenCode processing: **Task 2.2:** Design and add environment obstacles and test structures (ramps, platforms, walls)
+[0m
+> build · stepfun/step-3.5-flash:free
+[0m
+I'll complete Task 2.2 by designing and adding environment obstacles and test structures. Let me first explore the current project structure to understand what's already in place.
+[0m→ [0mRead .
+[0m
+[0m$ [0mfind . -type f -name "*.world" -o -name "*.sdf" -o -type d -name "models" 2>/dev/null | head -20
+./transformer_gazebo/worlds/transformer_world.world
+./transformer_gazebo/models
+[0m
+[0m→ [0mRead transformer_gazebo/worlds/transformer_world.world
+[0m
+[0m$ [0mls -la transformer_gazebo/models/
+total 8
+drwxr-xr-x 2 julien julien 4096 Mar 12 23:22 .
+drwxr-xr-x 6 julien julien 4096 Mar 12 23:23 ..
+[0m
+[0m$ [0mmkdir -p transformer_gazebo/models/ramp/{model.config,meshes}
+[0m
+[0m$ [0mmkdir -p transformer_gazebo/models/platform/{model.config,meshes}
+[0m
+[0m$ [0mmkdir -p transformer_gazebo/models/wall/{model.config,meshes}
+[0m
+[0m$ [0mmkdir -p transformer_gazebo/models/obstacle_course/{model.config,meshes}
+Now I'll create obstacle models and enhance the world. I'll create:
+1. A ramp model
+2. A platform model
+3. A wall model
+4. A step/obstacle model
+[0m✗ [0mwrite failed
+[91m[1mError: [0mEISDIR: illegal operation on a directory, read
+[0m
+[0m← [0mWrite transformer_gazebo/models/ramp/model.sdf
+Wrote file successfully.
+[0m
+Now I'll create the model configuration files and SDF definitions for each obstacle:
+[0m$ [0mrm -rf transformer_gazebo/models/ramp transformer_gazebo/models/platform transformer_gazebo/models/wall transformer_gazebo/models/obstacle_course
+I made an error - I created "model.config" as a directory instead of a file. Let me fix this:
+[0m
+[0m$ [0mmkdir -p transformer_gazebo/models/ramp transformer_gazebo/models/platform transformer_gazebo/models/wall transformer_gazebo/models/obstacle_course
+[0m
+[0m← [0mWrite transformer_gazebo/models/ramp/model.config
+Wrote file successfully.
+[0m
+[0m← [0mWrite transformer_gazebo/models/ramp/model.sdf
+Wrote file successfully.
+[0m
+[0m← [0mWrite transformer_gazebo/models/platform/model.config
+Wrote file successfully.
+[0m
+[0m← [0mWrite transformer_gazebo/models/platform/model.sdf
+Wrote file successfully.
+[0m
+Now I'll create all the model files:
+[0m← [0mWrite transformer_gazebo/models/wall/model.config
+Wrote file successfully.
+[0m
+[0m← [0mWrite transformer_gazebo/models/wall/model.sdf
+Wrote file successfully.
+[0m
+[0m← [0mWrite transformer_gazebo/models/obstacle_course/model.config
+Wrote file successfully.
+[0m
+[0m← [0mWrite transformer_gazebo/models/obstacle_course/model.sdf
+Wrote file successfully.
+[0m
+Now I'll update the world file to add these obstacles in strategic positions for testing transformation scenarios:
+[0m→ [0mRead transformer_gazebo/worlds/transformer_world.world
+[0m
+[0m← [0mEdit transformer_gazebo/worlds/transformer_world.world
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/transformer_gazebo/worlds/transformer_world.world
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/transformer_gazebo/worlds/transformer_world.world
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/transformer_gazebo/worlds/transformer_world.world
+@@ -45,6 +45,33 @@
+       - Humanoid spawn: [0, 0, 0.1] with orientation 0 (facing +X)
+       - Vehicular spawn: [5, 0, 0.2] with orientation 0 (facing +X)
+       These coordinates are documented in config/spawn_points.yaml
+     -->
++
++    <!-- OBSTACLES FOR TRANSFORMATION TESTING -->
++
++    <!-- Ramp: Tests climbing capability for both vehicular and humanoid forms -->
++    <include>
++      <uri>model://ramp</uri>
++      <pose>3.0 2.0 0 0 0 0</pose>
++    </include>
++
++    <!-- Platform: Elevated surface requiring transformation/climbing to access -->
++    <include>
++      <uri>model://platform</uri>
++      <pose>-3.0 2.0 0 0 0 0</pose>
++    </include>
++
++    <!-- Wall: Barrier requiring navigation or transformation to overcome -->
++    <include>
++      <uri>model://wall</uri>
++      <pose>0.0 -3.0 0 0 0 1.5708</pose>
++    </include>
++
++    <!-- Obstacle Course: Combined challenges for comprehensive testing -->
++    <include>
++      <uri>model://obstacle_course</uri>
++      <pose>-5.0 -2.0 0 0 0 0</pose>
++    </include>
++
+   </world>
+ </sdf>
+
+[0m
+Now let me check the TASKS.md to mark Task 2.2 as complete and verify the project structure:
+[0m→ [0mRead TASKS.md
+[0m→ [0mRead README.md
+[0m
+[0m← [0mEdit TASKS.md
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/TASKS.md
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/TASKS.md
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/TASKS.md
+@@ -13,9 +13,9 @@
+ 
+ ## Phase 2: World & Environment Configuration
+ - [x] **Task 2.1:** Create basic Gazebo world file with ground plane, lighting, and physics settings
+   - *Deliverable:* `transformer_gazebo/worlds/transformer_world.world` with proper gravity, physics engine, and ambient lighting
+-- [ ] **Task 2.2:** Design and add environment obstacles and test structures (ramps, platforms, walls)
++- [x] **Task 2.2:** Design and add environment obstacles and test structures (ramps, platforms, walls)
+   - *Deliverable:* Enhanced world file with 3D models of obstacles in `transformer_gazebo/models/` and referenced in world file
+ - [ ] **Task 2.3:** Configure sensor placement locations (cameras, LIDAR, IMU) in world for robot perception testing
+   - *Deliverable:* Sensor model placements in world file with ROS2 sensor plugin configurations
+ - [ ] **Task 2.4:** Create demo scenario spawn points for both humanoid and vehicular configurations
+
+[0m
+Now I'll mark Task 2.2 as complete in TASKS.md and update the README with information about the obstacles:
+[0m← [0mEdit README.md
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
+@@ -17,9 +17,12 @@
+ 
+ **Phase 2: World & Environment Configuration** (In Progress)
+ 
+ - ✅ Task 2.1: Basic Gazebo world file created ([transformer_gazebo/worlds/transformer_world.world](transformer_gazebo/worlds/transformer_world.world))
+-- ⬜ Task 2.2: Environment obstacles and test structures
++- ✅ Task 2.2: Environment obstacles and test structures added
++  - Created models: ramp, platform, wall, obstacle_course
++  - Located in: `transformer_gazebo/models/`
++  - Integrated into world file for transformation testing
+ - ⬜ Task 2.3: Sensor placement configuration
+ - ⬜ Task 2.4: Demo scenario spawn points
+ 
+ ## Architecture
+
+[0m
+Now I'll add a section describing the obstacles:
+[0m← [0mEdit README.md
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
+@@ -199,8 +199,23 @@
+ 4. Drives ~10m to destination
+ 5. Transforms back to humanoid
+ 6. Completes final approach to goal
+ 
++## Environment & Obstacles
++
++The simulation world includes various obstacles to test transformation capabilities:
++
++- **Ramp** (3m long, incline ~5.7°): Tests climbing ability for both vehicular and humanoid forms
++- **Platform** (2m×2m, elevated 1m): Requires climbing or transformation to access elevated surfaces
++- **Wall** (2m high): Barrier that tests navigation, obstacle avoidance, and transformation for overcoming
++- **Obstacle Course**: Combined challenges including:
++  - Central wall obstacle
++  - Two-step platform progression (0.3m each step)
++  - Narrow elevated platform (1m×0.4m)
++  - Slope element for incline testing
++
++The obstacles are positioned to create a comprehensive test environment that requires different robot configurations for optimal navigation.
++
+ ## Documentation
+ 
+ - **Architecture**: [docs/architecture.md](docs/architecture.md) - Complete technical specifications
+ - **ROS2 Control**: [ros2_control documentation](http://control.ros.org/master/index.html)
+
+[0m
+[0m$ [0mfind transformer_gazebo/models -type f | sort
+transformer_gazebo/models/obstacle_course/model.config
+transformer_gazebo/models/obstacle_course/model.sdf
+transformer_gazebo/models/platform/model.config
+transformer_gazebo/models/platform/model.sdf
+transformer_gazebo/models/ramp/model.config
+transformer_gazebo/models/ramp/model.sdf
+transformer_gazebo/models/wall/model.config
+transformer_gazebo/models/wall/model.sdf
+[0m
+Now let me verify the model directory structure is correct:
+📝 Log saved: logs/iteration-8.md
+📊 Token Usage: 5750 / Session: 37750 / 64000

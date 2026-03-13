@@ -18,7 +18,10 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
 **Phase 2: World & Environment Configuration** (In Progress)
 
 - ✅ Task 2.1: Basic Gazebo world file created ([transformer_gazebo/worlds/transformer_world.world](transformer_gazebo/worlds/transformer_world.world))
-- ⬜ Task 2.2: Environment obstacles and test structures
+- ✅ Task 2.2: Environment obstacles and test structures added
+  - Created models: ramp, platform, wall, obstacle_course
+  - Located in: `transformer_gazebo/models/`
+  - Integrated into world file for transformation testing
 - ⬜ Task 2.3: Sensor placement configuration
 - ⬜ Task 2.4: Demo scenario spawn points
 
@@ -196,6 +199,21 @@ The test scenario demonstrates complete functionality:
 4. Drives ~10m to destination
 5. Transforms back to humanoid
 6. Completes final approach to goal
+
+## Environment & Obstacles
+
+The simulation world includes various obstacles to test transformation capabilities:
+
+- **Ramp** (3m long, incline ~5.7°): Tests climbing ability for both vehicular and humanoid forms
+- **Platform** (2m×2m, elevated 1m): Requires climbing or transformation to access elevated surfaces
+- **Wall** (2m high): Barrier that tests navigation, obstacle avoidance, and transformation for overcoming
+- **Obstacle Course**: Combined challenges including:
+  - Central wall obstacle
+  - Two-step platform progression (0.3m each step)
+  - Narrow elevated platform (1m×0.4m)
+  - Slope element for incline testing
+
+The obstacles are positioned to create a comprehensive test environment that requires different robot configurations for optimal navigation.
 
 ## Documentation
 

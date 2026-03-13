@@ -14,7 +14,7 @@
 ## Phase 2: World & Environment Configuration
 - [x] **Task 2.1:** Create basic Gazebo world file with ground plane, lighting, and physics settings
   - *Deliverable:* `transformer_gazebo/worlds/transformer_world.world` with proper gravity, physics engine, and ambient lighting
-- [ ] **Task 2.2:** Design and add environment obstacles and test structures (ramps, platforms, walls)
+- [x] **Task 2.2:** Design and add environment obstacles and test structures (ramps, platforms, walls)
   - *Deliverable:* Enhanced world file with 3D models of obstacles in `transformer_gazebo/models/` and referenced in world file
 - [ ] **Task 2.3:** Configure sensor placement locations (cameras, LIDAR, IMU) in world for robot perception testing
   - *Deliverable:* Sensor model placements in world file with ROS2 sensor plugin configurations

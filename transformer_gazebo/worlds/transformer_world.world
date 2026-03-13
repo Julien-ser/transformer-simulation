@@ -46,5 +46,32 @@
       - Vehicular spawn: [5, 0, 0.2] with orientation 0 (facing +X)
       These coordinates are documented in config/spawn_points.yaml
     -->
+
+    <!-- OBSTACLES FOR TRANSFORMATION TESTING -->
+
+    <!-- Ramp: Tests climbing capability for both vehicular and humanoid forms -->
+    <include>
+      <uri>model://ramp</uri>
+      <pose>3.0 2.0 0 0 0 0</pose>
+    </include>
+
+    <!-- Platform: Elevated surface requiring transformation/climbing to access -->
+    <include>
+      <uri>model://platform</uri>
+      <pose>-3.0 2.0 0 0 0 0</pose>
+    </include>
+
+    <!-- Wall: Barrier requiring navigation or transformation to overcome -->
+    <include>
+      <uri>model://wall</uri>
+      <pose>0.0 -3.0 0 0 0 1.5708</pose>
+    </include>
+
+    <!-- Obstacle Course: Combined challenges for comprehensive testing -->
+    <include>
+      <uri>model://obstacle_course</uri>
+      <pose>-5.0 -2.0 0 0 0 0</pose>
+    </include>
+
   </world>
 </sdf>
