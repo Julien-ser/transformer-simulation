@@ -24,6 +24,13 @@ find_package(pluginlib REQUIRED)
 find_package(transformer_description REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
+# Add test dependencies
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  find_package(gtest REQUIRED)
+  find_package(ament_cmake_gtest REQUIRED)
+endif()
+
 # Generate custom messages and services
 rosidl_generate_interfaces(${PROJECT_NAME}
   msg/TransformationStatus.msg
@@ -49,6 +56,25 @@ ament_target_dependencies(transformation_state_machine
 rosidl_target_interfaces(transformation_state_machine
   ${PROJECT_NAME} "rosidl_typesupport_cpp"
 )
+
+# Unit tests for transformation state machine
+if(BUILD_TESTING)
+  ament_add_gtest(test_transformation_state_machine
+    test/transformation_state_machine_test.cpp
+    TIMEOUT 30
+  )
+  ament_target_dependencies(test_transformation_state_machine
+    rclcpp
+    rclcpp_lifecycle
+    std_msgs
+    std_srvs
+    control_msgs
+    transformer_description
+  )
+  target_include_directories(test_transformation_state_machine PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+  )
+endif()
 
 # Install executables
 install(TARGETS

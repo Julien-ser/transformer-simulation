@@ -51,6 +51,32 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
   - Copyright headers included on all mesh files
   - Components: torso_base, torso_mid, torso_top, head_base, head_dome, shoulder_joint, upper_arm, lower_arm, hip_joint, upper_leg, lower_leg
 
+**Phase 4: ROS2 Control & Transformation Logic** 🔄 In Progress
+
+- ✅ Task 4.1: Implement ROS2 control configuration for both robot forms ([transformer_control/config/](transformer_control/config/))
+  - Separate controller configurations: `humanoid_controllers.yaml` and `vehicular_controllers.yaml`
+  - Joint state broadcaster always active
+  - Humanoid: single trajectory controller for all 15+ joints
+  - Vehicular: wheel velocity controller + position controller for arms/head
+- ✅ **Task 4.2: Develop transformation state machine node** ([src/transformation_state_machine.cpp](transformer_control/src/transformation_state_machine.cpp))
+  - ROS2 lifecycle node with proper state management
+  - Transformation states: IDLE, TRANSFORMING_TO_VEHICULAR, TRANSFORMING_TO_HUMANOID, EMERGENCY_STOP, ERROR
+  - ROS2 services: `transform_to_vehicular`, `transform_to_humanoid`, `emergency_stop`
+  - Controller lifecycle management (deactivate current, activate target)
+  - Joint locking/releasing through controller switching
+  - Safety checks with periodic monitoring
+  - Status publisher on `/transformation_status` topic
+  - Comprehensive unit and integration tests ([test/](transformer_control/test/))
+- [ ] Task 4.3: Create transformation execution controller (pending)
+- [ ] Task 4.4: Implement safety monitoring node (pending)
+
+**Phase 5: Integration & Autonomous Loop** ⏳ Not Started
+
+- [ ] Task 5.1: Build unified launch file
+- [ ] Task 5.2: Create autonomous demonstration node
+- [ ] Task 5.3: Develop RViz configuration
+- [ ] Task 5.4: Create comprehensive end-to-end test scenario
+
 ## Architecture
 
 ### Technology Stack

@@ -34,7 +34,7 @@
 ## Phase 4: ROS2 Control & Transformation Logic
 - [x] **Task 4.1:** Implement ROS2 control configuration for both robot forms with joint state controllers and effort/position interfaces
   - *Deliverable:* `transformer_control/config/control.yaml` with separate controller configurations for humanoid (`humanoid_controllers.yaml`) and vehicular (`vehicular_controllers.yaml`) modes
-- [ ] **Task 4.2:** Develop transformation state machine node that handles mode switching between humanoid and vehicular configurations
+- [x] **Task 4.2:** Develop transformation state machine node that handles mode switching between humanoid and vehicular configurations
   - *Deliverable:* C++/Python node `transformer_control/src/transformation_state_machine.cpp` with ROS2 lifecycle, state transitions, joint locking/releasing logic, and safety checks
 - [ ] **Task 4.3:** Create transformation execution controller that animates the morphing process with joint trajectories
   - *Deliverable:* Transformation trajectory generator in `transformer_control/src/transformation_controller.cpp` publishing to `joint_trajectory_controller` with interpolation and collision avoidance
