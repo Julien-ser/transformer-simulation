@@ -508,3 +508,19 @@ Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation
  - [ ] **Task 2.1:** Create basic Gazebo world file with ground plane, lighting, and physics settings
 
 [0m
+[0m$ [0mgit add . && git commit -m "Task 1.4: Complete initial project README with comprehensive setup, build, and run instructions" && git status
+[main dcef3a9] Task 1.4: Complete initial project README with comprehensive setup, build, and run instructions
+ 3 files changed, 246 insertions(+), 1 deletion(-)
+ create mode 100644 logs/iteration-6.md
+On branch main
+nothing to commit, working tree clean
+[0m
+**Task 1.4 complete!**
+
+✅ README.md is comprehensive with setup steps, build/run instructions, simulation launch commands, and expected behavior descriptions
+✅ TASKS.md updated with [x] completion marker
+✅ Changes committed to GitHub
+
+**Phase 1 status:** All 4 tasks now complete. Ready to begin Phase 2 (World & Environment Configuration).
+📝 Log saved: logs/iteration-6.md
+📊 Token Usage: 4500 / Session: 27250 / 64000
