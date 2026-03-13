@@ -13,6 +13,9 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
+find_package(rclcpp_action REQUIRED)
+find_package(rclcpp_components REQUIRED)
+find_package(lifecycle_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
 find_package(sensor_msgs REQUIRED)
@@ -57,6 +60,26 @@ rosidl_target_interfaces(transformation_state_machine
   ${PROJECT_NAME} "rosidl_typesupport_cpp"
 )
 
+# Transformation controller executable
+add_executable(transformation_controller src/transformation_controller.cpp)
+target_include_directories(transformation_controller PRIVATE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(transformation_controller
+  rclcpp
+  rclcpp_action
+  rclcpp_components
+  lifecycle_msgs
+  sensor_msgs
+  trajectory_msgs
+  control_msgs
+  transformer_description
+)
+rosidl_target_interfaces(transformation_controller
+  ${PROJECT_NAME} "rosidl_typesupport_cpp"
+)
+
 # Unit tests for transformation state machine
 if(BUILD_TESTING)
   ament_add_gtest(test_transformation_state_machine
@@ -79,6 +102,7 @@ endif()
 # Install executables
 install(TARGETS
   transformation_state_machine
+  transformation_controller
   DESTINATION lib/${PROJECT_NAME}
 )
 
@@ -97,6 +121,8 @@ install(DIRECTORY launch config
 ament_export_dependencies(
   rclcpp
   rclcpp_lifecycle
+  rclcpp_action
+  rclcpp_components
   std_msgs
   std_srvs
   sensor_msgs
