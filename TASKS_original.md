@@ -2,7 +2,7 @@
 **Mission:** Make a configuration of a robot simulation that involves a robot turning from humanoid to vehicular form and back. With a ros2 programming loop and everything. World files and whatnot
 
 ## Phase 1: Planning & Environment Setup
-- [x] **Task 1.1:** Define technical architecture document specifying ROS2 distribution (Humble/Iron), simulation framework (Gazebo Classic/Ignition), and transformation mechanism approach
+- [ ] **Task 1.1:** Define technical architecture document specifying ROS2 distribution (Humble/Iron), simulation framework (Gazebo Classic/Ignition), and transformation mechanism approach
   - *Deliverable:* `docs/architecture.md` with component diagram and ROS2 topic/service layout
 - [ ] **Task 1.2:** Set up ROS2 workspace structure with proper package organization
   - *Deliverable:* Complete ROS2 workspace at `~/ros2_ws/src/transformer_sim/` with CMakeLists.txt and package.xml templates for: `transformer_gazebo`, `transformer_control`, `transformer_description`
