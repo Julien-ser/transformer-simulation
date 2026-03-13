@@ -1,0 +1,509 @@
+<?xml version="1.0"?>
+<robot name="transformer" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Configuration parameter -->
+  <xacro:arg name="form" default="humanoid" doc="Robot form: humanoid or vehicular"/>
+
+  <!-- Shared materials -->
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name="gray">
+    <color rgba="0.5 0.5 0.5 1"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <!-- Base link (always present) -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Torso macro (humanoid only) -->
+  <xacro:macro name="torso" params="parent">
+    <link name="torso_base">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/torso_base.stl"/>
+        </geometry>
+        <material name="blue"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.3 0.2 0.4"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="5.0"/>
+        <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.08" iyz="0.0" izz="0.05"/>
+      </inertial>
+    </link>
+    <joint name="torso_yaw" type="revolute">
+      <parent link="${parent}"/>
+      <child link="torso_base"/>
+      <origin xyz="0 0 0.05" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="50" velocity="1.0" lower="-1.57" upper="1.57"/>
+    </joint>
+
+    <link name="torso_pitch_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/torso_mid.stl"/>
+        </geometry>
+        <material name="blue"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.25 0.18 0.3"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="4.0"/>
+        <inertia ixx="0.08" ixy="0.0" ixz="0.0" iyy="0.06" iyz="0.0" izz="0.04"/>
+      </inertial>
+    </link>
+    <joint name="torso_pitch" type="revolute">
+      <parent link="torso_base"/>
+      <child link="torso_pitch_link"/>
+      <origin xyz="0 0 0.2" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="50" velocity="1.0" lower="-0.5" upper="0.5"/>
+    </joint>
+
+    <link name="torso_roll_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/torso_top.stl"/>
+        </geometry>
+        <material name="blue"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.2 0.15 0.25"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="3.0"/>
+        <inertia ixx="0.05" ixy="0.0" ixz="0.0" iyy="0.04" iyz="0.0" izz="0.03"/>
+      </inertial>
+    </link>
+    <joint name="torso_roll" type="revolute">
+      <parent link="torso_pitch_link"/>
+      <child link="torso_roll_link"/>
+      <origin xyz="0 0 0.15" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="50" velocity="1.0" lower="-0.3" upper="0.3"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Head macros (shared) -->
+  <xacro:macro name="head_pan" params="parent">
+    <link name="head_pan_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/head_base.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.1 0.1 0.08"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.003"/>
+      </inertial>
+    </link>
+    <joint name="head_pan" type="revolute">
+      <parent link="${parent}"/>
+      <child link="head_pan_link"/>
+      <origin xyz="0 0 0.12" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="20" velocity="1.0" lower="-1.57" upper="1.57"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="head_tilt" params="parent">
+    <link name="head_tilt_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/head_dome.stl"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry>
+          <sphere radius="0.08"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.5"/>
+        <inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.002" iyz="0.0" izz="0.002"/>
+      </inertial>
+    </link>
+    <joint name="head_tilt" type="revolute">
+      <parent link="${parent}"/>
+      <child link="head_tilt_link"/>
+      <origin xyz="0 0 0.04" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="20" velocity="1.0" lower="-0.5" upper="0.5"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Arm macros (shared) -->
+  <xacro:macro name="arm_shoulder" params="side parent_x parent_y parent_z">
+    <link name="${side}_shoulder_pitch_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/shoulder_joint.stl"/>
+        </geometry>
+        <material name="gray"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.05 0.05 0.08"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.5"/>
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+      </inertial>
+    </link>
+    <joint name="${side}_shoulder_pitch" type="revolute">
+      <parent link="${parent_x}"/>
+      <child link="${side}_shoulder_pitch_link"/>
+      <origin xyz="${parent_x} ${parent_y} ${parent_z}" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="30" velocity="1.0" lower="-1.57" upper="1.57"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="arm_upper" params="side">
+    <link name="${side}_upper_arm_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/upper_arm.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.12" radius="0.04"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <inertia ixx="0.004" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.004"/>
+      </inertial>
+    </link>
+    <joint name="${side}_shoulder_roll" type="revolute">
+      <parent link="${side}_shoulder_pitch_link"/>
+      <child link="${side}_upper_arm_link"/>
+      <origin xyz="0 0 0.04" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="30" velocity="1.0" lower="-1.57" upper="1.57"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="arm_lower" params="side">
+    <link name="${side}_lower_arm_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/lower_arm.stl"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.1" radius="0.035"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.8"/>
+        <inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.0005" iyz="0.0" izz="0.002"/>
+      </inertial>
+    </link>
+    <joint name="${side}_elbow" type="revolute">
+      <parent link="${side}_upper_arm_link"/>
+      <child link="${side}_lower_arm_link"/>
+      <origin xyz="0 -0.06 0" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="20" velocity="1.0" lower="-1.57" upper="0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Leg macro (humanoid only) -->
+  <xacro:macro name="leg" params="side torso_parent hip_yaw_x hip_yaw_y hip_yaw_z">
+    <link name="${side}_hip_yaw_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/hip_joint.stl"/>
+        </geometry>
+        <material name="gray"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.08 0.08 0.06"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1.0"/>
+        <inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.002" iyz="0.0" izz="0.001"/>
+      </inertial>
+    </link>
+    <joint name="${side}_hip_yaw" type="revolute">
+      <parent link="${torso_parent}"/>
+      <child link="${side}_hip_yaw_link"/>
+      <origin xyz="${hip_yaw_x} ${hip_yaw_y} ${hip_yaw_z}" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="60" velocity="1.0" lower="-0.5" upper="0.5"/>
+    </joint>
+
+    <link name="${side}_upper_leg_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/upper_leg.stl"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.3" radius="0.06"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="2.5"/>
+        <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.002" iyz="0.0" izz="0.02"/>
+      </inertial>
+    </link>
+    <joint name="${side}_hip_pitch" type="revolute">
+      <parent link="${side}_hip_yaw_link"/>
+      <child name="${side}_upper_leg_link"/>
+      <origin xyz="0 0 0.03" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="80" velocity="1.0" lower="-1.57" upper="1.57"/>
+    </joint>
+
+    <link name="${side}_lower_leg_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://transformer_description/meshes/lower_leg.stl"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.3" radius="0.05"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="2.0"/>
+        <inertia ixx="0.015" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.015"/>
+      </inertial>
+    </link>
+    <joint name="${side}_knee" type="revolute">
+      <parent link="${side}_upper_leg_link"/>
+      <child link="${side}_lower_leg_link"/>
+      <origin xyz="0 0 -0.15" rpy="0 0 0"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="60" velocity="1.0" lower="0" upper="2.0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Vehicle body macro -->
+  <xacro:macro name="vehicle_body" params="parent">
+    <link name="vehicle_body">
+      <visual>
+        <geometry>
+          <box size="0.6 0.4 0.2"/>
+        </geometry>
+        <material name="blue"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.6 0.4 0.2"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="15.0"/>
+        <inertia ixx="0.3" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.15"/>
+      </inertial>
+    </link>
+    <joint name="body_to_base" type="fixed">
+      <parent link="${parent}"/>
+      <child link="vehicle_body"/>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Wheel macro -->
+  <xacro:macro name="wheel" params="name parent x y z">
+    <link name="${name}">
+      <visual>
+        <geometry>
+          <cylinder length="0.08" radius="0.15"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.08" radius="0.14"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="2.0"/>
+        <inertia ixx="0.004" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.004"/>
+      </inertial>
+    </link>
+    <joint name="${name}_joint" type="continuous">
+      <parent link="${parent}"/>
+      <child link="${name}"/>
+      <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Transmission macros -->
+  <xacro:macro name="effort_trans" params="joint_name">
+    <transmission name="${joint_name}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint_name}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${joint_name}_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:macro name="velocity_trans" params="joint_name">
+    <transmission name="${joint_name}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint_name}">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${joint_name}_motor">
+        <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <!-- Conditional assembly -->
+  <xacro:if value="$(arg form) == 'humanoid'">
+    <!-- Torso -->
+    <xacro:torso parent="base_link"/>
+
+    <!-- Head (attached to torso_roll_link) -->
+    <xacro:head_pan parent="torso_roll_link"/>
+    <xacro:head_tilt parent="head_pan_link"/>
+
+    <!-- Left arm -->
+    <xacro:arm_shoulder side="left" parent_x="0.12" parent_y="-0.08" parent_z="0.08"/>
+    <xacro:arm_upper side="left"/>
+    <xacro:arm_lower side="left"/>
+
+    <!-- Right arm -->
+    <xacro:arm_shoulder side="right" parent_x="-0.12" parent_y="-0.08" parent_z="0.08"/>
+    <xacro:arm_upper side="right"/>
+    <xacro:arm_lower side="right"/>
+
+    <!-- Left leg -->
+    <xacro:leg side="left" torso_parent="torso_roll_link" hip_yaw_x="0.1" hip_yaw_y="-0.05" hip_yaw_z="-0.05"/>
+
+    <!-- Right leg -->
+    <xacro:leg side="right" torso_parent="torso_roll_link" hip_yaw_x="-0.1" hip_yaw_y="-0.05" hip_z="-0.05"/>
+
+    <!-- Transmissions -->
+    <!-- Torso -->
+    <xacro:effort_trans joint_name="torso_yaw"/>
+    <xacro:effort_trans joint_name="torso_pitch"/>
+    <xacro:effort_trans joint_name="torso_roll"/>
+
+    <!-- Head -->
+    <xacro:effort_trans joint_name="head_pan"/>
+    <xacro:effort_trans joint_name="head_tilt"/>
+
+    <!-- Arms -->
+    <xacro:effort_trans joint_name="left_shoulder_pitch"/>
+    <xacro:effort_trans joint_name="left_shoulder_roll"/>
+    <xacro:effort_trans joint_name="left_elbow"/>
+    <xacro:effort_trans joint_name="right_shoulder_pitch"/>
+    <xacro:effort_trans joint_name="right_shoulder_roll"/>
+    <xacro:effort_trans joint_name="right_elbow"/>
+
+    <!-- Legs -->
+    <xacro:effort_trans joint_name="left_hip_yaw"/>
+    <xacro:effort_trans joint_name="left_hip_pitch"/>
+    <xacro:effort_trans joint_name="left_knee"/>
+    <xacro:effort_trans joint_name="right_hip_yaw"/>
+    <xacro:effort_trans joint_name="right_hip_pitch"/>
+    <xacro:effort_trans joint_name="right_knee"/>
+  </xacro:if>
+
+  <xacro:if value="$(arg form) == 'vehicular'">
+    <!-- Vehicle body -->
+    <xacro:vehicle_body parent="base_link"/>
+
+    <!-- Wheels -->
+    <xacro:wheel name="front_left_wheel" parent="vehicle_body" x="0.2" y="-0.18" z="-0.1"/>
+    <xacro:wheel name="front_right_wheel" parent="vehicle_body" x="0.2" y="0.18" z="-0.1"/>
+    <xacro:wheel name="rear_left_wheel" parent="vehicle_body" x="-0.2" y="-0.18" z="-0.1"/>
+    <xacro:wheel name="rear_right_wheel" parent="vehicle_body" x="-0.2" y="0.18" z="-0.1"/>
+
+    <!-- Head (attached to vehicle body) -->
+    <xacro:head_pan parent="vehicle_body"/>
+    <xacro:head_tilt parent="head_pan_link"/>
+
+    <!-- Left arm (tucked) -->
+    <xacro:arm_shoulder side="left" parent_x="0.15" parent_y="-0.25" parent_z="0"/>
+    <xacro:arm_upper side="left"/>
+    <xacro:arm_lower side="left"/>
+
+    <!-- Right arm (tucked) -->
+    <xacro:arm_shoulder side="right" parent_x="0.15" parent_y="0.25" parent_z="0"/>
+    <xacro:arm_upper side="right"/>
+    <xacro:arm_lower side="right"/>
+
+    <!-- Transmissions -->
+    <!-- Wheels (velocity control) -->
+    <xacro:velocity_trans joint_name="front_left_wheel_joint"/>
+    <xacro:velocity_trans joint_name="front_right_wheel_joint"/>
+    <xacro:velocity_trans joint_name="rear_left_wheel_joint"/>
+    <xacro:velocity_trans joint_name="rear_right_wheel_joint"/>
+
+    <!-- Head -->
+    <xacro:effort_trans joint_name="head_pan"/>
+    <xacro:effort_trans joint_name="head_tilt"/>
+
+    <!-- Arms -->
+    <xacro:effort_trans joint_name="left_shoulder_pitch"/>
+    <xacro:effort_trans joint_name="left_shoulder_roll"/>
+    <xacro:effort_trans joint_name="left_elbow"/>
+    <xacro:effort_trans joint_name="right_shoulder_pitch"/>
+    <xacro:effort_trans joint_name="right_shoulder_roll"/>
+    <xacro:effort_trans joint_name="right_elbow"/>
+  </xacro:if>
+
+</robot>

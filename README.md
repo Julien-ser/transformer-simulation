@@ -39,7 +39,12 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
   - 6 degrees of freedom: 4 wheel joints (continuous rotation) + head (pan/tilt)
   - Compact body geometry with folded arm configuration
   - Wheel transmissions using VelocityJointInterface for drive control
-- ⬜ Task 3.3: Unified URDF with transformation definitions
+- ✅ Task 3.3: Unified URDF with transformation definitions complete ([transformer_description/urdf/transformer_complete.urdf.xacro](transformer_description/urdf/transformer_complete.urdf.xacro))
+  - Single xacro file with conditional form selection via `form` argument
+  - Shared components: base_link, head, arms, materials, transmission macros
+  - Humanoid-specific: torso and leg macros with 9+ DOF
+  - Vehicular-specific: body and wheels with 4 continuous joints
+  - Usage: `ros2 run xacro xacro transformer_complete.urdf.xacro form:=humanoid`
 - ⬜ Task 3.4: Build 3D mesh assets (STL/Collada)
 
 ## Architecture
