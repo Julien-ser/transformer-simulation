@@ -1,0 +1,21 @@
+# ROS2 Control Configuration for Transformer Robot
+# This file loads the appropriate controller configurations based on robot form
+
+# Controller manager configuration
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    # Joint state broadcaster (always active)
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    # Humanoid configuration (loaded when in humanoid form)
+    humanoid_controllers:
+      type: string
+      value: "humanoid_controllers.yaml"
+
+    # Vehicular configuration (loaded when in vehicular form)
+    vehicular_controllers:
+      type: string
+      value: "vehicular_controllers.yaml"

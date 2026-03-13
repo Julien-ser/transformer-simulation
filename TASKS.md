@@ -32,7 +32,7 @@
   - *Deliverable:* Mesh files in `transformer_description/meshes/` with proper copyright headers, optimized triangle counts (<5k each), and collision shapes
 
 ## Phase 4: ROS2 Control & Transformation Logic
-- [ ] **Task 4.1:** Implement ROS2 control configuration for both robot forms with joint state controllers and effort/position interfaces
+- [x] **Task 4.1:** Implement ROS2 control configuration for both robot forms with joint state controllers and effort/position interfaces
   - *Deliverable:* `transformer_control/config/control.yaml` with separate controller configurations for humanoid (`humanoid_controllers.yaml`) and vehicular (`vehicular_controllers.yaml`) modes
 - [ ] **Task 4.2:** Develop transformation state machine node that handles mode switching between humanoid and vehicular configurations
   - *Deliverable:* C++/Python node `transformer_control/src/transformation_state_machine.cpp` with ROS2 lifecycle, state transitions, joint locking/releasing logic, and safety checks
