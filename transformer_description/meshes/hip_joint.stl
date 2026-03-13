@@ -1,0 +1,52 @@
+solid hip_joint
+  copyright Copyright (c) 2026, Transformer Robot Project
+  license MIT
+  vertices
+    0.04 0.04 0.03
+    -0.04 0.04 0.03
+    -0.04 -0.04 0.03
+    0.04 -0.04 0.03
+    0.04 0.04 -0.03
+    -0.04 0.04 -0.03
+    -0.04 -0.04 -0.03
+    0.04 -0.04 -0.03
+  endloop
+  facets
+    outer loop
+      vertex 0 1 2
+    endloop
+    outer loop
+      vertex 0 2 3
+    endloop
+    outer loop
+      vertex 4 5 6
+    endloop
+    outer loop
+      vertex 4 6 7
+    endloop
+    outer loop
+      vertex 0 4 7
+    endloop
+    outer loop
+      vertex 0 7 3
+    endloop
+    outer loop
+      vertex 1 5 6
+    endloop
+    outer loop
+      vertex 1 6 2
+    endloop
+    outer loop
+      vertex 0 1 5
+    endloop
+    outer loop
+      vertex 0 5 4
+    endloop
+    outer loop
+      vertex 2 3 7
+    endloop
+    outer loop
+      vertex 2 7 6
+    endloop
+  endloop
+endsolid hip_joint

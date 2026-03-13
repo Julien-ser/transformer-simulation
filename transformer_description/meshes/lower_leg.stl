@@ -1,0 +1,70 @@
+solid lower_leg
+  copyright Copyright (c) 2026, Transformer Robot Project
+  license MIT
+  vertices
+    0.045 0.0 0.15
+    -0.045 0.0 0.15
+    0.0 0.045 0.15
+    0.0 -0.045 0.15
+    0.045 0.0 -0.15
+    -0.045 0.0 -0.15
+    0.0 0.045 -0.15
+    0.0 -0.045 -0.15
+  endloop
+  facets
+    outer loop
+      vertex 0 1 2
+    endloop
+    outer loop
+      vertex 0 2 3
+    endloop
+    outer loop
+      vertex 4 5 6
+    endloop
+    outer loop
+      vertex 4 6 7
+    endloop
+    outer loop
+      vertex 0 4 5
+    endloop
+    outer loop
+      vertex 0 5 1
+    endloop
+    outer loop
+      vertex 2 3 7
+    endloop
+    outer loop
+      vertex 2 7 6
+    endloop
+    outer loop
+      vertex 0 1 5
+    endloop
+    outer loop
+      vertex 0 5 4
+    endloop
+    outer loop
+      vertex 1 2 6
+    endloop
+    outer loop
+      vertex 2 6 3
+    endloop
+    outer loop
+      vertex 3 4 7
+    endloop
+    outer loop
+      vertex 3 7 2
+    endloop
+    outer loop
+      vertex 4 0 7
+    endloop
+    outer loop
+      vertex 7 0 3
+    endloop
+    outer loop
+      vertex 5 6 1
+    endloop
+    outer loop
+      vertex 6 2 1
+    endloop
+  endloop
+endsolid lower_leg

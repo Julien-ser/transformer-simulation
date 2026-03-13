@@ -1,0 +1,52 @@
+solid upper_arm
+  copyright Copyright (c) 2026, Transformer Robot Project
+  license MIT
+  vertices
+    0.0 0.035 0.06
+    0.0 -0.035 0.06
+    0.033 0.0 0.06
+    -0.033 0.0 0.06
+    0.0 0.035 -0.06
+    0.0 -0.035 -0.06
+    0.033 0.0 -0.06
+    -0.033 0.0 -0.06
+  endloop
+  facets
+    outer loop
+      vertex 0 1 2
+    endloop
+    outer loop
+      vertex 0 2 3
+    endloop
+    outer loop
+      vertex 4 5 6
+    endloop
+    outer loop
+      vertex 4 6 7
+    endloop
+    outer loop
+      vertex 0 4 6
+    endloop
+    outer loop
+      vertex 0 6 2
+    endloop
+    outer loop
+      vertex 1 5 7
+    endloop
+    outer loop
+      vertex 1 7 3
+    endloop
+    outer loop
+      vertex 0 1 5
+    endloop
+    outer loop
+      vertex 0 5 4
+    endloop
+    outer loop
+      vertex 2 3 7
+    endloop
+    outer loop
+      vertex 2 7 6
+    endloop
+  endloop
+endsolid upper_arm
