@@ -81,10 +81,14 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
   - Safety status publishing (`/safety_status`, `/safety_level`, `/safety_violation`)
   - Configurable check rates and thresholds via parameters
 
-**Phase 5: Integration & Autonomous Loop** ⏳ Not Started
+**Phase 5: Integration & Autonomous Loop** 🔄 In Progress (1/4 complete)
 
+- [x] **Task 5.2:** Create autonomous demonstration node ([src/autonomous_mission.cpp](transformer_control/src/autonomous_mission.cpp))
+  - Autonomous decision-making for transformation based on mission objectives
+  - Waypoint navigation with distance-based form selection
+  - Obstacle detection using LIDAR for real-time transformation decisions
+  - Parameters: distance_threshold (5.0m), obstacle_range (3.0m), cooldown (10.0s)
 - [ ] Task 5.1: Build unified launch file
-- [ ] Task 5.2: Create autonomous demonstration node
 - [ ] Task 5.3: Develop RViz configuration
 - [ ] Task 5.4: Create comprehensive end-to-end test scenario
 
@@ -169,10 +173,84 @@ ros2 launch transformer_gazebo transformer_simulation.launch.py initial_form:=ve
 
 ### Autonomous Mission Demo
 
+The autonomous mission node (`autonomous_mission`) demonstrates intelligent form selection based on mission objectives and environmental conditions.
+
 ```bash
-# Run test scenario: humanoid → vehicular → humanoid cycle
-ros2 launch transformer_gazebo test_transformation_scenario.launch.py
+# Launch simulation with autonomous mission enabled (default)
+ros2 launch transformer_gazebo transformer_simulation.launch.py
+
+# Or launch directly with specific initial form
+ros2 launch transformer_gazebo transformer_simulation.launch.py initial_form:=humanoid
 ```
+
+#### Autonomous Decision Logic
+
+The node continuously evaluates whether to transform based on:
+
+- **Humanoid → Vehicular**: Switches when distance to waypoint > 5.0m AND no obstacles detected within 3.0m
+  - Optimal for long-distance travel with clear paths
+  - Vehicular form provides 4x speed (2.0 m/s vs 0.5 m/s)
+
+- **Vehicular → Humanoid**: Switches when:
+  - Obstacle detected within 3.0m (maneuverability needed)
+  - Or approaching waypoint (< 2.5m) for precision navigation
+
+#### Mission Parameters
+
+Configure via ROS2 parameters (can be passed as launch arguments or set via command line):
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `distance_threshold` | 5.0 | Switch to vehicular for distances greater than this (meters) |
+| `obstacle_range` | 3.0 | Consider obstacles within this range for transformation (meters) |
+| `humanoid_speed` | 0.5 | Assumed humanoid movement speed (m/s) |
+| `vehicular_speed` | 2.0 | Assumed vehicular movement speed (m/s) |
+| `goal_tolerance` | 0.5 | Distance within which waypoint is considered reached (meters) |
+| `transformation_cooldown` | 10.0 | Minimum time between transformations (seconds) |
+| `mission_waypoints` | [] | Optional flat array of waypoints [x1, y1, x2, y2, ...] |
+
+**Example with custom parameters:**
+
+```bash
+ros2 launch transformer_gazebo transformer_simulation.launch.py \
+  distance_threshold:=7.0 \
+  obstacle_range:=4.0 \
+  mission_waypoints:="[10.0, 0.0, 10.0, 10.0, 0.0, 10.0, 0.0, 0.0]"
+```
+
+#### Default Mission
+
+If no waypoints are provided, the autonomous mission follows a square pattern:
+1. (0,0) → (5,0) - 5m forward
+2. (5,0) → (5,5) - 5m right
+3. (5,5) → (0,5) - 5m back
+4. (0,5) → (0,0) - 5m left (return to start)
+
+#### Monitoring Mission Progress
+
+```bash
+# View mission status and decisions
+ros2 topic echo /transformer/status
+
+# Monitor waypoint progress
+ros2 topic echo /odom | grep pose
+
+# Watch transformation decisions
+ros2 log --include autonomous_mission
+
+# Check current active form
+echo "Current form: $(ros2 topic echo -n 1 /transformer/status | grep current_form)"
+```
+
+#### Expected Behavior
+
+1. **Start**: Robot spawns in specified form (default: humanoid)
+2. **Navigation**: Autonomous mission node begins waypoint navigation
+3. **Form Selection**: Node decides when to transform based on distance and obstacles
+4. **Transformation**: State machine executes smooth morphing sequence (~5-6 seconds)
+5. **Completion**: All waypoints reached → mission complete
+
+The node demonstrates practical autonomous behavior: using humanoid form for precise navigation and obstacle negotiation, vehicular form for efficient long-distance travel.
 
 ### Manual Control
 
@@ -222,6 +300,10 @@ ros2 topic echo /transformer/progress
 │   └── config/
 ├── transformer_control/
 │   ├── src/
+│   │   ├── transformation_state_machine.cpp
+│   │   ├── transformation_controller.cpp
+│   │   ├── safety_monitor.cpp
+│   │   └── autonomous_mission.cpp
 │   ├── config/
 │   └── launch/
 ├── transformer_description/
