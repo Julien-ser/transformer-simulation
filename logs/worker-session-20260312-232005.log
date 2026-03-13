@@ -1349,3 +1349,84 @@ Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation
 Let me validate the URDF file to ensure it's syntactically correct:
 📝 Log saved: logs/iteration-11.md
 📊 Token Usage: 5250 / Session: 54000 / 64000
+✅ Changes committed
+To https://github.com/Julien-ser/transformer-simulation.git
+   086b67d..7f6a63a  main -> main
+✅ Pushed to GitHub
+📊 Updated Tasks: 9/20 completed, 11 remaining
+   Next task: **Task 3.2:** Design complete URDF for vehicular robot form ...
+📍 Iteration 12 at Thu Mar 12 11:36:36 PM EDT 2026...
+🤖 OpenCode processing: **Task 3.2:** Design complete URDF for vehicular robot form with wheel joints and compact body
+[0m
+> build · stepfun/step-3.5-flash:free
+[0m
+I'll start by exploring the current project structure to understand what has been built so far, especially the humanoid URDF from Task 3.1, to maintain consistency when designing the vehicular form.
+[0m✱ [0mGlob "**/*.urdf"[90m 1 match[0m
+[0m✱ [0mGlob "transformer_description/**/*"[90m 3 matches[0m
+[0m✱ [0mGlob "**/*.xacro"[90m 0 matches[0m
+[0m→ [0mRead transformer_description/urdf/humanoid.urdf
+Let me read the humanoid URDF to understand the design patterns and structure:
+[0m→ [0mRead transformer_description/package.xml
+[0m✱ [0mGlob "transformer_description/meshes/**"[90m 0 matches[0m
+Let me check the meshes directory structure to see what assets are available:
+[0m
+[0m$ [0mmkdir -p /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/transformer_description/meshes
+I see the meshes directory is empty. I'll design the vehicular URDF using simple geometric shapes (which can later be replaced with STL meshes). Based on the humanoid design, I'll create a compact 4-wheeled vehicle form that shares the base_link and can reuse components like the head.
+
+Let me first create the meshes directory, then write the vehicular URDF:
+[0m
+[0m← [0mWrite transformer_description/urdf/vehicular.urdf
+Wrote file successfully.
+[0m
+Now I'll write the vehicular URDF file:
+[0m→ [0mRead TASKS.md
+Now let me verify the URDF structure and update TASKS.md:
+I'll now mark Task 3.2 as complete in TASKS.md:
+[0m
+[0m← [0mEdit TASKS.md
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/TASKS.md
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/TASKS.md
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/TASKS.md
+@@ -23,9 +23,9 @@
+ 
+ ## Phase 3: Robot Modeling & URDF Development
+ - [x] **Task 3.1:** Design complete URDF for humanoid robot form with articulated joints (head, arms, legs, torso)
+   - *Deliverable:* `transformer_description/urdf/humanoid.urdf` with at least 15 DOF, collision meshes, and visual STL references
+-- [ ] **Task 3.2:** Design complete URDF for vehicular robot form with wheel joints and compact body
++- [x] **Task 3.2:** Design complete URDF for vehicular robot form with wheel joints and compact body
+   - *Deliverable:* `transformer_description/urdf/vehicular.urdf` with wheel joints, reduced profile, and shared component references to humanoid parts
+ - [ ] **Task 3.3:** Create unified URDF with transformation definitions - both forms must share common base link and reusable components
+   - *Deliverable:* `transformer_description/urdf/transformer_complete.urdf` using xacro includes for shared components and conditional joint visibility
+ - [ ] **Task 3.4:** Build 3D mesh assets (STL/Collada) for all robot components: limbs, wheels, body segments, transformation mechanisms
+
+[0m
+[0m→ [0mRead README.md
+Now let me read the README to update it with current progress:
+I'll update the README to mark Task 3.2 as complete:
+[0m
+[0m← [0mEdit README.md
+Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
+===================================================================
+--- /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
++++ /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/README.md
+@@ -34,9 +34,12 @@
+ - ✅ Task 3.1: Humanoid URDF design complete ([transformer_description/urdf/humanoid.urdf](transformer_description/urdf/humanoid.urdf))
+   - 17 degrees of freedom: torso (3), head (2), arms (3 each), legs (3 each)
+   - Visual and collision elements with STL references
+   - ROS2 control transmissions configured
+-- ⬜ Task 3.2: Vehicular URDF design
++- ✅ Task 3.2: Vehicular URDF design complete ([transformer_description/urdf/vehicular.urdf](transformer_description/urdf/vehicular.urdf))
++  - 6 degrees of freedom: 4 wheel joints (continuous rotation) + head (pan/tilt)
++  - Compact body geometry with folded arm configuration
++  - Wheel transmissions using VelocityJointInterface for drive control
+ - ⬜ Task 3.3: Unified URDF with transformation definitions
+ - ⬜ Task 3.4: Build 3D mesh assets (STL/Collada)
+ 
+ ## Architecture
+
+[0m
+Let me quickly verify the URDF is well-formed XML:
+[0m$ [0mxmllint --noout /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation/transformer_description/urdf/vehicular.urdf
+✓ Task 3.2 complete. Created `vehicular.urdf` with 4-wheel drive, compact body, shared components (base_link, head, arms), and proper ROS2 control transmissions.
+📝 Log saved: logs/iteration-12.md

@@ -35,7 +35,10 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
   - 17 degrees of freedom: torso (3), head (2), arms (3 each), legs (3 each)
   - Visual and collision elements with STL references
   - ROS2 control transmissions configured
-- ⬜ Task 3.2: Vehicular URDF design
+- ✅ Task 3.2: Vehicular URDF design complete ([transformer_description/urdf/vehicular.urdf](transformer_description/urdf/vehicular.urdf))
+  - 6 degrees of freedom: 4 wheel joints (continuous rotation) + head (pan/tilt)
+  - Compact body geometry with folded arm configuration
+  - Wheel transmissions using VelocityJointInterface for drive control
 - ⬜ Task 3.3: Unified URDF with transformation definitions
 - ⬜ Task 3.4: Build 3D mesh assets (STL/Collada)
 

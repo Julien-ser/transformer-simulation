@@ -24,7 +24,7 @@
 ## Phase 3: Robot Modeling & URDF Development
 - [x] **Task 3.1:** Design complete URDF for humanoid robot form with articulated joints (head, arms, legs, torso)
   - *Deliverable:* `transformer_description/urdf/humanoid.urdf` with at least 15 DOF, collision meshes, and visual STL references
-- [ ] **Task 3.2:** Design complete URDF for vehicular robot form with wheel joints and compact body
+- [x] **Task 3.2:** Design complete URDF for vehicular robot form with wheel joints and compact body
   - *Deliverable:* `transformer_description/urdf/vehicular.urdf` with wheel joints, reduced profile, and shared component references to humanoid parts
 - [ ] **Task 3.3:** Create unified URDF with transformation definitions - both forms must share common base link and reusable components
   - *Deliverable:* `transformer_description/urdf/transformer_complete.urdf` using xacro includes for shared components and conditional joint visibility
