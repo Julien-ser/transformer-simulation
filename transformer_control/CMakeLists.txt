@@ -146,6 +146,12 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+# Install Python test monitor script
+install(PROGRAMS
+  src/test_monitor.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_export_dependencies(
   rclcpp
   rclcpp_lifecycle

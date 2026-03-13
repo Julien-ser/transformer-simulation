@@ -81,22 +81,14 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
   - Safety status publishing (`/safety_status`, `/safety_level`, `/safety_violation`)
   - Configurable check rates and thresholds via parameters
 
-**Phase 5: Integration & Autonomous Loop** 🔄 In Progress (3/4 complete)
+**Phase 5: Integration & Autonomous Loop** ✅ Complete (4/4 complete)
 
 - [x] **Task 5.1:** Build unified launch file ([launch/transformer_simulation.launch.py](transformer_gazebo/launch/transformer_simulation.launch.py))
-  - Unified launch with arguments for initial form, world selection, and controller configuration
-  - Supports RViz integration via `rviz:=true` argument
 - [x] **Task 5.2:** Create autonomous demonstration node ([src/autonomous_mission.cpp](transformer_control/src/autonomous_mission.cpp))
-  - Autonomous decision-making for transformation based on mission objectives
-  - Waypoint navigation with distance-based form selection
-  - Obstacle detection using LIDAR for real-time transformation decisions
 - [x] **Task 5.3:** Develop RViz configuration for visualization ([rviz/transformer_visualization.rviz](transformer_description/rviz/transformer_visualization.rviz))
-  - Complete visualization setup with robot model display
-  - Separate joint state displays for humanoid and vehicular forms (toggleable)
-  - TF tree visualization showing all coordinate frames
-  - Real-time transformation status and safety monitoring panels
-  - Waypoint markers display for autonomous mission tracking
-- [ ] Task 5.4: Create comprehensive end-to-end test scenario
+- [x] **Task 5.4:** Create comprehensive end-to-end test scenario
+  - Test launch: [launch/test_transformation_scenario.launch.py](transformer_gazebo/launch/test_transformation_scenario.launch.py)
+  - Test monitor: [src/test_monitor.py](transformer_control/src/test_monitor.py)
 
 ## Architecture
 
@@ -299,9 +291,67 @@ During transformation:
 1. Watch the **Transformation Status** panel for state changes
 2. Observe joint positions moving via the colored joint frames
 3. Check **Safety Level** - should remain NORMAL during safe transformations
-4. Robot model will smoothly morph between configurations
+ 4. Robot model will smoothly morph between configurations
 
-### RViz Configuration File
+### End-to-End Test Scenario
+
+A comprehensive integration test is provided to validate the complete transformation cycle with specific navigation goals.
+
+```bash
+# Launch the end-to-end test scenario
+ros2 launch transformer_gazebo test_transformation_scenario.launch.py rviz:=true
+```
+
+**Test Scenario:**
+
+1. **Spawn**: Robot starts in humanoid form at origin (0, 0)
+2. **Humanoid Navigation**: Walks 5m forward along +X axis
+3. **First Transformation**: Automatically transforms to vehicular form (distance > 5m threshold)
+4. **Vehicular Navigation**: Drives 10m further forward (total 15m from start)
+5. **Second Transformation**: Automatically transforms back to humanoid form (approaching goal within 2.5m)
+6. **Final Approach**: Humanoid completes last 0.5m with precision navigation
+7. **Mission Complete**: All waypoints reached → test passes
+
+**Expected Duration:** ~30-60 seconds depending on speeds
+
+**Test Validation:**
+
+The test monitor node (`test_monitor`) verifies:
+- ✅ Robot starts in humanoid form
+- ✅ First waypoint at (5.0, 0.0) reached
+- ✅ Transformation count = 2 (humanoid→vehicular, vehicular→humanoid)
+- ✅ Second waypoint at (15.0, 0.0) reached
+- ✅ Final form is humanoid (for precision)
+- ✅ Mission completes within 120 second timeout
+
+**Test Output:**
+
+The test monitor publishes results to `/test_monitor/result` (std_msgs/Bool):
+- `true` = test passed
+- `false` = test failed (reason logged)
+
+Monitor progress in real-time:
+```bash
+# View transformation status
+ros2 topic echo /transformer/status
+
+# Monitor test monitor logs
+ros2 log --include test_monitor
+
+# Check mission completion
+ros2 topic echo /mission_complete
+```
+
+**Customizing Test Parameters:**
+
+You can override test parameters by passing them to the launch file:
+```bash
+ros2 launch transformer_gazebo test_transformation_scenario.launch.py \
+  test.distance_threshold:=6.0 \
+  test.obstacle_range:=4.0
+```
+
+See `test_transformation_scenario.launch.py` for full list of configurable parameters.
 
 ### Manual Control
 
@@ -346,6 +396,8 @@ ros2 topic echo /transformer/progress
 ~/ros2_ws/src/transformer_sim/
 ├── transformer_gazebo/
 │   ├── launch/
+│   │   ├── transformer_simulation.launch.py
+│   │   └── test_transformation_scenario.launch.py
 │   ├── worlds/
 │   ├── models/
 │   └── config/
@@ -354,7 +406,8 @@ ros2 topic echo /transformer/progress
 │   │   ├── transformation_state_machine.cpp
 │   │   ├── transformation_controller.cpp
 │   │   ├── safety_monitor.cpp
-│   │   └── autonomous_mission.cpp
+│   │   ├── autonomous_mission.cpp
+│   │   └── test_monitor.py
 │   ├── config/
 │   └── launch/
 ├── transformer_description/
