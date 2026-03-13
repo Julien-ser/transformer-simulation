@@ -1,0 +1,6 @@
+# Emergency stop service
+string reason  # Reason for emergency stop
+---
+# Response
+bool success
+string message  # Confirmation message

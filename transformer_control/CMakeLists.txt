@@ -22,22 +22,39 @@ find_package(ros2_control REQUIRED)
 find_package(ros2_controllers REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(transformer_description REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
-# TODO: Add executables when source files are created
-# add_executable(transformation_state_machine src/transformation_state_machine.cpp)
-# ament_target_dependencies(transformation_state_machine
-#   rclcpp
-#   rclcpp_lifecycle
-#   std_msgs
-#   std_srvs
-#   sensor_msgs
-#   trajectory_msgs
-#   control_msgs
-#   ros2_control
-#   ros2_controllers
-#   pluginlib
-#   transformer_description
-# )
+# Generate custom messages and services
+rosidl_generate_interfaces(${PROJECT_NAME}
+  msg/TransformationStatus.msg
+  srv/TransformToVehicular.srv
+  srv/TransformToHumanoid.srv
+  srv/EmergencyStop.srv
+  DEPENDENCIES std_msgs std_srvs
+)
+
+# Transformation state machine executable
+add_executable(transformation_state_machine src/transformation_state_machine.cpp)
+ament_target_dependencies(transformation_state_machine
+  rclcpp
+  rclcpp_lifecycle
+  std_msgs
+  std_srvs
+  trajectory_msgs
+  control_msgs
+  ros2_control
+  ros2_controllers
+  transformer_description
+)
+rosidl_target_interfaces(transformation_state_machine
+  ${PROJECT_NAME} "rosidl_typesupport_cpp"
+)
+
+# Install executables
+install(TARGETS
+  transformation_state_machine
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 install(DIRECTORY launch config
   DESTINATION share/${PROJECT_NAME}/

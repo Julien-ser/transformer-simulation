@@ -1,0 +1,5 @@
+# Transform to humanoid service
+---
+# Response
+bool success
+string message  # Status message

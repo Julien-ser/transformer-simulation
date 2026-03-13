@@ -1,0 +1,18 @@
+# Transform to vehicular service
+---
+# Response
+bool success
+string message  # Status message
+---
+# Transform to humanoid service
+---
+# Response
+bool success
+string message  # Status message
+---
+# Emergency stop service
+string reason  # Reason for emergency stop
+---
+# Response
+bool success
+string message  # Confirmation message
