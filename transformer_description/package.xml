@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format_3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>transformer_description</name>
+  <version>0.0.1</version>
+  <description>URDF models, meshes, and RViz configuration for transformer robot</description>
+  <maintainer email="developer@example.com">Developer</maintainer>
+  <license>Apache 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+  <depend>rviz2</depend>
+  <depend>ros2_control</depend>
+</package>
