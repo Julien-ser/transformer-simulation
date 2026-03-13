@@ -422,3 +422,29 @@ Index: /home/julien/Desktop/Free-Wiggum-opencode/projects/transformer-simulation
 
 [0m
 Now update README.md to reflect Task 1.3 completion:
+Now commit these changes:
+[0m$ [0mgit add -A && git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   README.md
+	modified:   TASKS.md
+	new file:   logs/iteration-5.md
+	modified:   logs/worker-session-20260312-232005.log
+[0m
+[0m$ [0mgit commit -m "Task 1.3: Add verified dependency installation script and mark complete
+
+- Created executable setup_deps.sh with comprehensive ROS2/Gazebo installation
+- Script verifies all required packages: ros2_control, gazebo_ros, joint_state_publisher, etc.
+- Updated TASKS.md to mark Task 1.3 as complete
+- Updated README.md with link to setup script and current progress"
+[main d6d0c58] Task 1.3: Add verified dependency installation script and mark complete
+ 4 files changed, 267 insertions(+), 2 deletions(-)
+ create mode 100644 logs/iteration-5.md
+[0m
+[0m$ [0mgit push origin main
+To https://github.com/Julien-ser/transformer-simulation.git
+   5dd2522..d6d0c58  main -> main
+[0m
+📝 Log saved: logs/iteration-5.md
+📊 Token Usage: 4750 / Session: 22750 / 64000
