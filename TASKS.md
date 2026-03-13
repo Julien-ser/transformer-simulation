@@ -12,7 +12,7 @@
   - *Deliverable:* Comprehensive `README.md` with setup steps, simulation launch commands, and expected behavior descriptions
 
 ## Phase 2: World & Environment Configuration
-- [ ] **Task 2.1:** Create basic Gazebo world file with ground plane, lighting, and physics settings
+- [x] **Task 2.1:** Create basic Gazebo world file with ground plane, lighting, and physics settings
   - *Deliverable:* `transformer_gazebo/worlds/transformer_world.world` with proper gravity, physics engine, and ambient lighting
 - [ ] **Task 2.2:** Design and add environment obstacles and test structures (ramps, platforms, walls)
   - *Deliverable:* Enhanced world file with 3D models of obstacles in `transformer_gazebo/models/` and referenced in world file
