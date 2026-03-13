@@ -81,15 +81,21 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
   - Safety status publishing (`/safety_status`, `/safety_level`, `/safety_violation`)
   - Configurable check rates and thresholds via parameters
 
-**Phase 5: Integration & Autonomous Loop** 🔄 In Progress (1/4 complete)
+**Phase 5: Integration & Autonomous Loop** 🔄 In Progress (3/4 complete)
 
+- [x] **Task 5.1:** Build unified launch file ([launch/transformer_simulation.launch.py](transformer_gazebo/launch/transformer_simulation.launch.py))
+  - Unified launch with arguments for initial form, world selection, and controller configuration
+  - Supports RViz integration via `rviz:=true` argument
 - [x] **Task 5.2:** Create autonomous demonstration node ([src/autonomous_mission.cpp](transformer_control/src/autonomous_mission.cpp))
   - Autonomous decision-making for transformation based on mission objectives
   - Waypoint navigation with distance-based form selection
   - Obstacle detection using LIDAR for real-time transformation decisions
-  - Parameters: distance_threshold (5.0m), obstacle_range (3.0m), cooldown (10.0s)
-- [ ] Task 5.1: Build unified launch file
-- [ ] Task 5.3: Develop RViz configuration
+- [x] **Task 5.3:** Develop RViz configuration for visualization ([rviz/transformer_visualization.rviz](transformer_description/rviz/transformer_visualization.rviz))
+  - Complete visualization setup with robot model display
+  - Separate joint state displays for humanoid and vehicular forms (toggleable)
+  - TF tree visualization showing all coordinate frames
+  - Real-time transformation status and safety monitoring panels
+  - Waypoint markers display for autonomous mission tracking
 - [ ] Task 5.4: Create comprehensive end-to-end test scenario
 
 ## Architecture
@@ -251,6 +257,51 @@ echo "Current form: $(ros2 topic echo -n 1 /transformer/status | grep current_fo
 5. **Completion**: All waypoints reached → mission complete
 
 The node demonstrates practical autonomous behavior: using humanoid form for precise navigation and obstacle negotiation, vehicular form for efficient long-distance travel.
+
+### RViz Visualization
+
+The simulation includes a comprehensive RViz configuration for monitoring robot state, transformation progress, and safety status.
+
+```bash
+# Launch simulation with RViz enabled
+ros2 launch transformer_gazebo transformer_simulation.launch.py rviz:=true
+
+# Or with specific initial form
+ros2 launch transformer_gazebo transformer_simulation.launch.py initial_form:=vehicular rviz:=true
+```
+
+#### RViz Displays
+
+The default configuration (`transformer_description/rviz/transformer_visualization.rviz`) includes:
+
+**Robot Visualization:**
+- **Robot Model** - Complete 3D visualization of the robot in its current form
+- **TF** - Coordinate frame tree showing all transforms (toggled via "Show Names", "Show Axes")
+- **Joint State Display (Humanoid)** - Visual joint frames for humanoid joints (15 DOF: torso, head, arms, legs)
+- **Joint State Display (Vehicular)** - Visual joint frames for vehicular joints (4 wheels + steering + arms/head)
+
+**Information Panels:**
+- **Transformation Status** - Live updates on transformation state (IDLE, TRANSFORMING, etc.) and progress percentage
+- **Safety Status** - Boolean safety flag (green=safe, red=unsafe)
+- **Safety Level** - Current safety level: NORMAL, WARNING, CRITICAL, EMERGENCY
+- **Waypoints** - 3D markers showing mission waypoints when using autonomous mission
+
+#### Display Groups
+
+To manage the two forms efficiently:
+- Disable **Joint State Display (Humanoid)** when in vehicular form to reduce clutter
+- Disable **Joint State Display (Vehicular)** when in humanoid form
+- Both displays are present by default, use checkboxes in the "Displays" panel to toggle
+
+#### Monitoring Transformation
+
+During transformation:
+1. Watch the **Transformation Status** panel for state changes
+2. Observe joint positions moving via the colored joint frames
+3. Check **Safety Level** - should remain NORMAL during safe transformations
+4. Robot model will smoothly morph between configurations
+
+### RViz Configuration File
 
 ### Manual Control
 

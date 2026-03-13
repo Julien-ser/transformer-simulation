@@ -1,0 +1,556 @@
+version: 1.17.0
+sources:
+  - ros__parameters:
+      attach_to_existing_topics: true
+      Chauvenet: 0.5
+      Colormaps:
+        - Colormaps:
+            - Default
+            - Grey
+            - Grey遍布
+            - Hot
+            - Jet
+            - Rainbow
+            - Spectral
+      XRayMode: false
+      alpha: 0.30000001192092896
+      autocenter: true
+      autoscale: 0.009999999776482582
+      axis: z
+      background: [0.8, 0.8, 0.8, 1.0]
+      camera: [1.9575554132461548, 18.503965377807617, 10.583383560180664, 0.002615318897649169, 0.7075829501152039, -0.7061562399864197, 0.0023303230651313076]
+      camera_pitch: 1.1497961282720898
+      camera_relative: false
+      camera_roll: -1.19555771301651e-10
+      camera_yaw: -1.5707980258464813
+      camera_z: 1.0
+      cameras: 1.0
+      cartoons: false
+      clipping: false
+      color: [0.0, 1.0, 0.0, 1.0]
+      color_datatype: float32
+      color_map: 4
+      color_transform: 0
+      color_var: a
+      colormap: Rainbow
+      colormap_sidebars: false
+      colormap_value: 0.0
+      connected: true
+      coordinates: false
+      decay: 0.009999999776482582
+      edge_weight: 1.0
+      edges: false
+      estimate_normals: false
+      fade: 0.009999999776482582
+      flat: false
+      frame: {}
+      free_cursor: false
+      fullscreen: false
+      geometry: Points
+      gripper: false
+      height: 600.0
+      histogram: false
+      history_length: 20.0
+      image_transport: raw
+      inverse_acceleration: false
+      joint: elbow_joint
+      joint_pose: [0.0, 0.0, 0.0, -0.0, -0.0, 1.0, -0.0]
+      keep_following: false
+      keep_paused: false
+      legend: true
+      legend_gravity: south_west
+      legend_in_set: false
+      legend_ns: ""
+      legend_position: [0.0, 0.0]
+      legend_scale: 1.0
+      legend_text_height: 0.009999999776482582
+      length: 0.5
+      lines: false
+      lod: 0.0
+      lod_original: 0.0
+      map_absolute: false
+      marker_scale: 1.0
+      markers: 1000
+      max_compression: 1
+      max_x: 0.30000001192092896
+      max_y: 0.30000001192092896
+      max_z: 0.30000001192092896
+      min_x: -0.30000001192092896
+      min_y: -0.30000001192092896
+      min_z: -0.30000001192092896
+      mouse_dz: 0.009999999776482582
+      named_color: red
+      named_colors: 10
+      nodelay: false
+      normal_scale: 0.009999999776482582
+      normals: false
+      orientation_relative: false
+      outline: false
+      overlay: false
+      overlay_position: south_east
+      pause: false
+      point_scale: 0.009999999776482582
+      points: false
+      polygons: true
+      pose: [0.0, 0.0, 0.0, -0.0, -0.0, 1.0, -0.0]
+      queue_size: 10
+      radius: 0.0050000000000000001
+      record: false
+      record_frames: false
+      record_path: ~/recordings
+      relative: true
+      render: true
+      resolution: 1.0
+      rhio: false
+      roll: 0.0
+      rotation: [0.0, 0.0, 0.0]
+      samples: 1
+      scale: 0.009999999776482582
+      scale_region: [0.0, 0.0, 0.0]
+      scatter_size: 0.009999999776482582
+      scatter_smart: false
+      selectable: true
+      size: [800.0, 600.0]
+      size_pixels: [0, 0]
+      skip: 0
+      slices: 1
+      splats: false
+      spot_light: true
+      storages: 10
+      style: Surface
+      subdivision: 1
+      suffix: _points
+      sync_topic_name: ""
+      synced: "*"
+      timeline: false
+      topic: /camera/points
+      transform_show: true
+      transform_visible: true
+      transforms:
+        - /world
+        - /base_link
+        - /torso_base
+        - /head_base
+        - /shoulder_left_joint
+        - /upper_arm_left
+        - /lower_arm_left
+        - /elbow_left_joint
+        - /shoulder_right_joint
+        - /upper_arm_right
+        - /lower_arm_right
+        - /elbow_right_joint
+        - /hip_left_joint
+        - /upper_leg_left
+        - /lower_leg_left
+        - /knee_left_joint
+        - /hip_right_joint
+        - /upper_leg_right
+        - /lower_leg_right
+        - /knee_right_joint
+        - /wheel_front_left_joint
+        - /wheel_front_right_joint
+        - /wheel_rear_left_joint
+        - /wheel_rear_right_joint
+      triangles: true
+      triangulation_type: 0
+      tube_radius: 0.0050000000000000001
+      type: PointCloud2
+      use_camera_frame: false
+      use_color: false
+      use_intensity: false
+      use_rayleigh: false
+      variable: intensity
+      vbreak: 0.5
+      view: 0
+      view_cull: false
+      view_iso: false
+      view_sep: false
+      view_x: false
+      view_y: false
+      view_z: false
+      wait_buffer_size: 100.0
+      wireframe: false
+      world_frame: /world
+      xray: false
+      zscale: 1.0
+visualizers:
+  - class: rviz_common/Displays
+    enabled: true
+    height: 1630.0
+    name: Displays
+    parent: ""
+    pos: [1260.0, 20.0]
+    properties:
+      LibNames:
+        - rviz_default_plugins/displays
+        - rviz_default_plugins/robot_tools
+      Options:
+        - CollapseStereo
+        - CollapseTransforms
+        - Deprecated_1
+        - Deprecated_2
+        - Deprecated_3
+        - Deprecated_4
+        - DisableMethodsViaIntrospection
+        - ForceSync
+        - FullReset
+        - GlobalOptions
+        - Help
+        - Load
+        - LoadConfig
+        - NewDisplay
+        - Quit
+        - RenameDisplay
+        - Save
+        - SaveConfig
+        - Screenshot
+        - SelectAll
+        - SetStyle
+        - UnselectAll
+      SerializationFormat: yaml
+      StereoSplitMode: SideBySide
+      StereoSplitEyes: 0
+      ToolClass: LeftMouseClickTool
+      Version: 1
+      bg_color: [48, 48, 48, 255]
+      current_tool: 3
+      default_group: ""
+      env: {}
+      enqueue_text: false
+      gate_duration: 0.009999999776482582
+      gate_skip: 0
+      image_provider_slots: 10
+      image_topics: 10
+      instruments_enabled: false
+      instruments_update_rate: 1.5
+      lock_aspect_ratio: false
+      menu:
+        - ["CollapseStere&o", "CollapseStereoToggle"]
+        - ["Collapse Tran&sforms", "CollapseTransformsToggle"]
+        - ["&Deprecated 1", "Deprecated1"]
+        - ["&Deprecated 2", "Deprecated2"]
+        - ["&Deprecated 3", "Deprecated3"]
+        - ["&Deprecated 4", "Deprecated4"]
+        - ["&Select All", "SelectAll"]
+        - ["&Unselect All", "UnselectAll"]
+        - ["---", 0]
+        - ["&New Display...", "NewDisplay"]
+        - ["&Load Config...", "LoadConfig"]
+        - ["&Save Config", "SaveConfig"]
+        - ["Save Config &As...", "SaveConfigAs"]
+        - ["&Quit", "Quit"]
+        - ["---", 0]
+      msg_ring_buffer_size: 10
+      plugins: {}
+      splitscreen: 0
+      stereo: 0
+      style: 1
+      symbols_scale: 0.030000001192092896
+      text_antialiasing: false
+      toolbar:
+        Icons:
+          - ["Load", "LoadConfig"]
+          - ["Save", "SaveConfig"]
+          - ["---", 0]
+          - ["Camera", "SetCamera"]
+          - ["Top", "SetViewTop"]
+          - ["Bottom", "SetViewBottom"]
+          - ["Left", "SetViewLeft"]
+          - ["Right", "SetViewRight"]
+          - ["Front", "SetViewFront"]
+          - ["Back", "SetViewBack"]
+          - ["---", 0]
+          - ["Select", "LeftMouseClickTool"]
+          - ["---", 0]
+          - ["Screenshot", "Screenshot"]
+          - ["---", 0]
+          - ["Zoom in", "ZoomIn"]
+          - ["Zoom out", "ZoomOut"]
+          - ["---", 0]
+          - ["Reset", "FullReset"]
+          - ["---", 0]
+        SpinBoxValues:
+          - name: Render Window
+            min: 0.0
+            max: 10.0
+            step: 0.10000000149011612
+            value: 3.0
+          - name: Text Height
+            min: 0.009999999776482582
+            max: 0.20000000298023224
+            step: 0.010000000298023226
+            value: 0.02499999994
+          - name: Tool
+            min: 0.0
+            max: 10.0
+            step: 1.0
+            value: 5.0
+      update_interval: 0.0
+      window_class: rviz_common/RenderWindow
+      window_height: 600.0
+      window_width: 800.0
+      windows:
+        - class: rviz_common/RenderWindow
+          enabled: true
+          id: 1
+          name: 3D Viz
+          parent: ""
+          pos: [20.0, 20.0]
+          properties:
+            Camera:
+              env:
+                background_color: '48, 48, 48, 0'
+                focal_distance: 1.0
+                near_clip: 0.01
+                far_clip: 100.0
+                projection: perspective
+                focal_shape: circle
+                focal_rings: 4
+                focal_size: 0.05000000074505806
+                blend_factor: 0.15000000596046448
+                blend_shape: circle
+                focal_blend: 0.020000000352971077
+              far_plane: 100.0
+              inverse_acceleration: false
+              near_plane: 0.01
+              position: [7.696134567260742, 10.200418472290039, 6.532368183135986]
+              projection: perspective
+              orientation: [-0.009517211347580194, -0.007305525451033354, -0.006098321109950304, 0.99986332654953]
+              target_frame: /world
+              target: [0.0, 0.0, 0.0]
+              up_axis: Z
+              view_controller: Orbit
+              zoom: 1.150120258331299
+            Class: rviz_common/RenderWindow
+            Name: 3D Viz
+            NumAnims: 0
+            NumDetails: 0
+            Visible: true
+            ZoomFactor: 1.0
+        - class: rviz_common/PropertyDisplay
+          enabled: true
+          height: 400.0
+          id: 2
+          name: Properties
+          parent: ""
+          pos: [1020.0, 20.0]
+          properties:
+            Class: rviz_common/PropertyDisplay
+            Visible: true
+      windows_enabled: true
+      window_title: Visualization
+  - Class: rviz_default_plugins/RobotModel
+    Name: Robot Model
+    Value:
+      Enabled: true
+      Class: rviz_default_plugins/RobotModel
+      Name: Robot Model
+      Robot Description: /robot_description
+      Visual Enabled: true
+      Collision Enabled: false
+      Collision Alpha: 0.5
+      Alpha: 1.0
+  - Class: rviz_default_plugins/TF
+    Name: TF
+    Value:
+      Enabled: true
+      Class: rviz_default_plugins/TF
+      Name: TF
+      Frame: /world
+      Frame to Show: /base_link
+      Show Names: true
+      Show Arrows: true
+      Show Axes: true
+      Axes Scale: 1.0
+      Show Names Value: true
+      Show Arrows Value: true
+      Show Axes Value: true
+      Update Interval: 0
+  - Class: rviz_default_plugins/JointState
+    Name: Joint State Display (Humanoid)
+    Value:
+      Enabled: true
+      Class: rviz_default_plugins/JointState
+      Name: Joint State Display (Humanoid)
+      Topic: /joint_states
+      Robot Description: /robot_description
+      Coordinate Frame: /base_link
+      Show Zero Positions: false
+      Color: [0.6, 0.545098066329956, 0, 1.0]
+      Alpha: 0.5
+      Scale: 1.5
+      Thickness: 0.3
+      Always Show Frames: false
+      Show Axes: true
+      Show Labels: false
+      Update Rate: 0.0
+      Show All: true
+      Description:
+        Torso:
+          - torso_base_joint
+          - torso_mid_joint
+          - torso_top_joint
+        Head:
+          - head_base_joint
+          - head_dome_joint
+        Left Arm:
+          - shoulder_left_joint
+          - elbow_left_joint
+          - wrist_left_joint
+        Right Arm:
+          - shoulder_right_joint
+          - elbow_right_joint
+          - wrist_right_joint
+        Left Leg:
+          - hip_left_joint
+          - knee_left_joint
+          - ankle_left_joint
+        Right Leg:
+          - hip_right_joint
+          - knee_right_joint
+          - ankle_right_joint
+  - Class: rviz_default_plugins/JointState
+    Name: Joint State Display (Vehicular)
+    Value:
+      Enabled: false
+      Class: rviz_default_plugins/JointState
+      Name: Joint State Display (Vehicular)
+      Topic: /joint_states
+      Robot Description: /robot_description
+      Coordinate Frame: /base_link
+      Show Zero Positions: false
+      Color: [0.545098066329956, 0, 0.6, 1.0]
+      Alpha: 0.5
+      Scale: 1.5
+      Thickness: 0.3
+      Always Show Frames: false
+      Show Axes: true
+      Show Labels: false
+      Update Rate: 0.0
+      Show All: true
+      Description:
+        Wheels:
+          - wheel_front_left_joint
+          - wheel_front_right_joint
+          - wheel_rear_left_joint
+          - wheel_rear_right_joint
+        Steering:
+          - front_steering_joint
+        Head:
+          - head_base_joint
+          - head_dome_joint
+        Arms (stowed):
+          - shoulder_left_joint
+          - elbow_left_joint
+          - wrist_left_joint
+          - shoulder_right_joint
+          - elbow_right_joint
+          - wrist_right_joint
+  - Class: rviz_default_plugins/Topic
+    Name: Transformation Status
+    Value:
+      Enabled: true
+      Class: rviz_default_plugins/Topic
+      Name: Transformation Status
+      Topic: /transformer/status
+      Message Type: transformer_control/msg/TransformationStatus
+      Text Color: [255, 255, 0, 255]
+      Background Color: [0, 0, 0, 128]
+      Num Messages: 10
+      Line Align: Left
+  - Class: rviz_default_plugins/Topic
+    Name: Safety Status
+    Value:
+      Enabled: true
+      Class: rviz_default_plugins/Topic
+      Name: Safety Status
+      Topic: /safety/status
+      Message Type: std_msgs/msg/Bool
+      Text Color: [0, 255, 0, 255]
+      Background Color: [0, 0, 0, 128]
+      Num Messages: 10
+      Line Align: Left
+  - Class: rviz_default_plugins/Topic
+    Name: Safety Level
+    Value:
+      Enabled: true
+      Class: rviz_default_plugins/Topic
+      Name: Safety Level
+      Topic: /safety/level
+      Message Type: std_msgs/msg/String
+      Text Color: [255, 255, 255, 255]
+      Background Color: [0, 0, 0, 128]
+      Num Messages: 5
+      Line Align: Left
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Waypoints
+    Value:
+      Enabled: true
+      Class: rviz_default_plugins/MarkerArray
+      Name: Waypoints
+      Marker Topic: /waypoints
+      Queue Size: 10
+      Draw Behind: true
+      Scale: 1.0
+views:
+  - Name: Default
+    class: rviz_common/View
+    Distance: 10.0
+    Eye: [7.0, 10.0, 6.0]
+    Focal Point: [0.0, 0.0, 0.0]
+    Focal Shape: Circle
+    Focal Size: 0.05000000074505806
+    Fov: 60.0
+    Frame: /world
+    Near Clip: 0.01
+    Pitch: 1.1497961282720898
+    Roll: 1.659657966809361e-10
+    Up Vector: [0.0, 0.0, 1.0]
+    Value: 0
+    Yaw: -1.5707963267948966
+windows:
+  - class: rviz_common/RenderWindow
+    enabled: true
+    id: 1
+    name: 3D Viz
+    pos: [20.0, 20.0]
+    properties:
+      Camera:
+        env:
+          background_color: '48, 48, 48, 0'
+          focal_distance: 1.0
+          near_clip: 0.01
+          far_clip: 100.0
+          projection: perspective
+          focal_shape: circle
+          focal_rings: 4
+          focal_size: 0.05000000074505806
+          blend_factor: 0.15000000596046448
+          blend_shape: circle
+          focal_blend: 0.020000000352971077
+        far_plane: 100.0
+        inverse_acceleration: false
+        near_plane: 0.01
+        position: [7.696134567260742, 10.200418472290039, 6.532368183135986]
+        projection: perspective
+        orientation: [-0.009517211347580194, -0.007305525451033354, -0.006098321109950304, 0.99986332654953]
+        target_frame: /world
+        target: [0.0, 0.0, 0.0]
+        up_axis: Z
+        view_controller: Orbit
+        zoom: 1.150120258331299
+      Class: rviz_common/RenderWindow
+      Name: 3D Viz
+      NumAnims: 0
+      NumDetails: 0
+      Visible: true
+      ZoomFactor: 1.0
+    class: rviz_common/RenderWindow
+    height: 600.0
+    width: 800.0
+plugin_providers:
+  - class: rviz_default_plugins/ROS
+    library: librviz_default_plugins.so
+  - class: rviz_common/YAMLConfig
+    library: rviz_common
+config_version: 1.17.0
