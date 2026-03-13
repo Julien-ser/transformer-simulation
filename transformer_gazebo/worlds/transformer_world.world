@@ -97,11 +97,51 @@
        <pose>0.0 8.0 0.5 0 0 -1.5708</pose>
      </include>
 
-     <!-- IMU Sensor: Near spawn points for orientation reference -->
-     <include>
-       <uri>model://imu_sensor</uri>
-       <pose>0.0 0.0 0.2 0 0 0</pose>
-     </include>
+      <!-- IMU Sensor: Near spawn points for orientation reference -->
+      <include>
+        <uri>model://imu_sensor</uri>
+        <pose>0.0 0.0 0.2 0 0 0</pose>
+      </include>
 
-   </world>
- </sdf>
+    <!-- SPAWN POINT MARKERS (Visual indicators for demo scenarios) -->
+
+    <!-- Humanoid Default Spawn Marker -->
+    <include>
+      <uri>model://spawn_marker_humanoid</uri>
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+    </include>
+
+    <!-- Vehicular Default Spawn Marker -->
+    <include>
+      <uri>model://spawn_marker_vehicular</uri>
+      <pose>5.0 0.0 0.0 0 0 0</pose>
+    </include>
+
+    <!-- Additional Scenario Spawn Markers -->
+    <include>
+      <uri>model://spawn_marker_generic</uri>
+      <pose>2.5 0.0 0.0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://spawn_marker_generic</uri>
+      <pose>-2.5 0.0 0.0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://spawn_marker_generic</uri>
+      <pose>-5.0 0.0 0.0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://spawn_marker_generic</uri>
+      <pose>0.0 -2.5 0.0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://spawn_marker_generic</uri>
+      <pose>8.0 8.0 0.0 0 0 0</pose>
+    </include>
+
+    </world>
+  </sdf>

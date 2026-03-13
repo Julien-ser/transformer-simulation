@@ -1,0 +1,99 @@
+# Spawn Points Configuration for Transformer Robot Simulation
+# Defines spawn locations for both humanoid and vehicular robot forms
+
+humanoid_spawns:
+  # Primary spawn location (default)
+  default:
+    position: [0.0, 0.0, 0.1]  # x, y, z (z is base height above ground)
+    orientation: 0.0           # Yaw in radians (0 = facing +X direction)
+
+  # Alternative spawn points for various demo scenarios
+  near_ramp:
+    position: [2.5, 0.0, 0.1]
+    orientation: 0.0
+    description: "Spawn near ramp for climbing demonstration"
+
+  near_platform:
+    position: [-2.5, 0.0, 0.1]
+    orientation: 0.0
+    description: "Spawn near elevated platform for access challenge"
+
+  obstacle_course:
+    position: [-5.0, 0.0, 0.1]
+    orientation: 0.0
+    description: "Spawn at obstacle course starting position"
+
+  rotation_test:
+    position: [0.0, 0.0, 0.1]
+    orientation: 1.5708  # 90 degrees, facing +Y
+    description: "Spawn with different orientation for rotation tests"
+
+vehicular_spawns:
+  # Primary spawn location (default)
+  default:
+    position: [5.0, 0.0, 0.2]   # Slightly higher ground clearance
+    orientation: 0.0            # Yaw in radians (0 = facing +X direction)
+
+  # Alternative spawn points
+  speed_test:
+    position: [0.0, 0.0, 0.2]
+    orientation: 0.0
+    description: "Spawn in open area for speed/distance testing"
+
+  near_wall:
+    position: [0.0, -2.5, 0.2]
+    orientation: 0.0
+    description: "Spawn near wall for obstacle avoidance"
+
+  corner_position:
+    position: [8.0, 8.0, 0.2]
+    orientation: -2.3562  # -135 degrees
+    description: "Spawn in corner for navigation tests"
+
+  ramp_approach:
+    position: [0.0, 2.0, 0.2]
+    orientation: 0.0
+    description: "Spawn positioned to approach ramp from distance"
+
+# Transformation test scenarios linking spawn points
+demo_scenarios:
+  basic_transformation:
+    description: "Simple transformation cycle demo"
+    start_form: humanoid
+    spawn_point: default
+    objectives:
+      - Walk 5 meters forward
+      - Transform to vehicular
+      - Drive 10 meters forward
+      - Transform back to humanoid
+
+  obstacle_overcoming:
+    description: "Use transformation to overcome obstacles"
+    start_form: humanoid
+    spawn_point: near_ramp
+    objectives:
+      - Navigate to ramp
+      - Climb ramp (humanoid climbing or transform to vehicular)
+      - Transform if needed
+      - Continue to platform
+
+  navigation_challenge:
+    description: "Navigate between waypoints using optimal form"
+    start_form: vehicular
+    spawn_point: speed_test
+    objectives:
+      - Drive to obstacle_course
+      - Transform to humanoid for detailed navigation
+      - Complete obstacle course
+      - Transform back to vehicular for return
+
+  multi_transformation:
+    description: "Multiple transformations in single mission"
+    start_form: humanoid
+    spawn_point: default
+    objectives:
+      - Walk short distance
+      - Transform to vehicular
+      - Drive long distance
+      - Transform to humanoid for precision movement
+      - Complete final objective

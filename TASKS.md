@@ -18,7 +18,7 @@
   - *Deliverable:* Enhanced world file with 3D models of obstacles in `transformer_gazebo/models/` and referenced in world file
 - [x] **Task 2.3:** Configure sensor placement locations (cameras, LIDAR, IMU) in world for robot perception testing
   - *Deliverable:* Sensor model placements in world file with ROS2 sensor plugin configurations
-- [ ] **Task 2.4:** Create demo scenario spawn points for both humanoid and vehicular configurations
+- [x] **Task 2.4:** Create demo scenario spawn points for both humanoid and vehicular configurations
   - *Deliverable:* Spawn coordinates documented in `config/spawn_points.yaml` and world file entity placements
 
 ## Phase 3: Robot Modeling & URDF Development
