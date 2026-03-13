@@ -80,6 +80,24 @@ rosidl_target_interfaces(transformation_controller
   ${PROJECT_NAME} "rosidl_typesupport_cpp"
 )
 
+# Safety monitor executable
+add_executable(safety_monitor src/safety_monitor.cpp)
+target_include_directories(safety_monitor PRIVATE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(safety_monitor
+  rclcpp
+  rclcpp_lifecycle
+  std_msgs
+  std_srvs
+  sensor_msgs
+  transformer_description
+)
+rosidl_target_interfaces(safety_monitor
+  ${PROJECT_NAME} "rosidl_typesupport_cpp"
+)
+
 # Unit tests for transformation state machine
 if(BUILD_TESTING)
   ament_add_gtest(test_transformation_state_machine
@@ -103,6 +121,7 @@ endif()
 install(TARGETS
   transformation_state_machine
   transformation_controller
+  safety_monitor
   DESTINATION lib/${PROJECT_NAME}
 )
 

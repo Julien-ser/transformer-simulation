@@ -51,7 +51,7 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
   - Copyright headers included on all mesh files
   - Components: torso_base, torso_mid, torso_top, head_base, head_dome, shoulder_joint, upper_arm, lower_arm, hip_joint, upper_leg, lower_leg
 
-**Phase 4: ROS2 Control & Transformation Logic** 🔄 In Progress
+**Phase 4: ROS2 Control & Transformation Logic** ✅ Complete
 
 - ✅ Task 4.1: Implement ROS2 control configuration for both robot forms ([transformer_control/config/](transformer_control/config/))
   - Separate controller configurations: `humanoid_controllers.yaml` and `vehicular_controllers.yaml`
@@ -67,10 +67,19 @@ Create a realistic simulation of a robot that transforms between humanoid and ve
   - Safety checks with periodic monitoring
   - Status publisher on `/transformation_status` topic
   - Comprehensive unit and integration tests ([test/](transformer_control/test/))
-- [x] Task 4.3: Create transformation execution controller (complete)
+- ✅ **Task 4.3: Create transformation execution controller** ([src/transformation_controller.cpp](transformer_control/src/transformation_controller.cpp))
   - Spline-based trajectory generation with collision avoidance and joint limit checking
   - Multi-controller coordination for complex morphing sequences
-- [ ] Task 4.4: Implement safety monitoring node (pending)
+  - Interpolation with collision risk assessment
+  - Real-time trajectory execution monitoring
+- ✅ **Task 4.4: Implement safety monitoring node** ([src/safety_monitor.cpp](transformer_control/src/safety_monitor.cpp))
+  - ROS2 lifecycle node with continuous safety oversight
+  - Joint limit validation against URDF-defined boundaries
+  - Self-collision detection with geometric heuristics
+  - Sensor health monitoring with timeout detection
+  - Emergency stop service integration
+  - Safety status publishing (`/safety_status`, `/safety_level`, `/safety_violation`)
+  - Configurable check rates and thresholds via parameters
 
 **Phase 5: Integration & Autonomous Loop** ⏳ Not Started
 
@@ -186,9 +195,12 @@ ros2 topic echo /transformer/progress
 | Topic | Message Type | Description |
 |-------|--------------|-------------|
 | `/joint_states` | sensor_msgs/msg/JointState | Current joint positions, velocities, efforts |
-| `/transformer/state` | std_msgs/msg/String | Current form: `HUMANOID`, `VEHICULAR`, `TRANSFORMING` |
-| `/transformer/progress` | std_msgs/msg/Float32 | Transformation progress 0.0-1.0 |
-| `/mission/decision` | std_msgs/msg/String | Autonomous decision: `WALK`, `DRIVE`, `TRANSFORM_H2V`, `TRANSFORM_V2H` |
+| `/transformation_status` | transformer_control/msg/TransformationStatus | Transformation state, progress, and safety status |
+| `/safety_status` | std_msgs/msg/Bool | Overall safety status (true=safe, false=unsafe) |
+| `/safety_level` | std_msgs/msg/String | Current safety level: NORMAL, WARNING, CRITICAL, EMERGENCY |
+| `/safety_violation` | std_msgs/msg/String | Detailed safety violation messages |
+| `/tf` | tf2_msgs/msg/TFMessage | Robot coordinate transforms |
+| `/robot_description` | std_msgs/msg/String | URDF robot model |
 
 ## Services
 
